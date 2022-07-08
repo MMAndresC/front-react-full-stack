@@ -18,7 +18,7 @@ const Navbar = () => {
                 />
             </div>
             <div className="dropdown-menu">
-                <span className="material-symbols-outlined">menu</span>
+                <span class="material-symbols-outlined">menu</span>
                 <div className="NavMenu">
                     <ol>
                         <li>
@@ -28,7 +28,7 @@ const Navbar = () => {
                         </li>
                         {user && user.role === 'admin' &&
                             <li>
-                                <Link className="NavLink" to="/private">Administracion </Link>
+                                <Link className="NavLink" to="/private">Admin</Link>
                             </li>
                         }
                         {!user && (
@@ -47,7 +47,7 @@ const Navbar = () => {
                         )}
                         {user &&
                             <li>
-                                <Link className="NavLink" to='/gestion'>Client zone</Link>
+                                <Link className="NavLink" to='/gestion'>Account</Link>
                             </li>
                         }
                         {user && (

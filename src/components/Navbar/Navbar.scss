@@ -45,6 +45,7 @@ nav {
 .NavMenu {
   display: flex;
   align-items: center;
+  margin-right: 2vh;
 
   @media screen and (max-width: 768px) {
     display: none;
