@@ -3,10 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteFilms} from "../../redux/films/films.actions";
+import { deleteFilms } from "../../redux/films/films.actions";
 
-const Films = ({user,dispath}) => {
-  const { film } = useSelector((state) => state.film);
+const Films = () => {
+  const { film } = useSelector(state => state.film);
+  const user = useSelector(state => state.auth.user);
+  //console.log(film);
   const dispatch = useDispatch();
   return (
     <>
@@ -19,7 +21,7 @@ const Films = ({user,dispath}) => {
                 <strong>Titulo </strong>
                 {fil.name}
               </p>
-              <img  src={fil.poster} alt="film" />
+              <img src={fil.poster} alt="film" />
               <p>
                 <strong>Synopsis </strong>
                 {fil.synopsis}
@@ -53,8 +55,8 @@ const Films = ({user,dispath}) => {
                 {fil.finDate}
               </p>
               <div>
-                {fil.isActive ==="true" && <p>Disponible en cartelera</p>}
-                {fil.isActive ==="false" && <p>No disponible en cartelera</p>}
+                {fil.isActive === "true" && <p>Disponible en cartelera</p>}
+                {fil.isActive === "false" && <p>No disponible en cartelera</p>}
               </div>
               {user && <button
                 className="button"
@@ -73,11 +75,11 @@ const Films = ({user,dispath}) => {
               >
                Editar
               </button>} */}
-              
+
             </div>
           );
         })}
     </>
   );
 };
-export default connect(state => ({user: state.auth.user}))(Films);
+export default connect(state => ({ user: state.auth.user }))(Films);

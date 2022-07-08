@@ -8,7 +8,7 @@ const EditFilms = () => {
     console.log(id);
     
     const {film} = useSelector(state => state.film);
-    console.log(film);
+    //console.log(film);
     //const filmToUpdate = film[id];
 
 
@@ -19,7 +19,8 @@ const EditFilms = () => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        dispatch(editFilms(form,id))
+        console.log(form);
+        dispatch(editFilms(form))
         navigate('/')
     }
 

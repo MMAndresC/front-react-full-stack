@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 
-import { addFilms } from "../../redux/films/films.actions";
-import { useDispatch } from "react-redux";
+import { addFilms, getFilms } from "../../redux/films/films.actions";
+import { useDispatch, useSelector } from "react-redux";
 import Films from "../Films/Films";
+import { useEffect } from "react";
+
 // import "./Admin.scss";
 
 const Admin = () => {
@@ -12,19 +14,31 @@ const Admin = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const { film } = useSelector(state => state.film); 
+
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if(film.length === 0){
+      dispatch(getFilms());
+    }
+   
+  }, [film]);
+
   const onSubmit = (formData) => {
+    if (formData.isActive === "true") {
+      formData.isActive = true;
+    } else {
+      formData.isActive = false;
+    }
     reset();
     dispatch(addFilms(formData));
   };
-  
 
   return (
     <div className="home">
-    <h1 className="h1one">Añade peliculas</h1>
+      <h1 className="h1one">Añade peliculas</h1>
       <div className="cardi">
-       
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <span>Titulo</span>
@@ -47,80 +61,50 @@ const Admin = () => {
               <span>{errors.name.message}</span>
             )}
           </div>
-        
+
           <div>
             <span>Imagen</span>
             <input type="text" name="poster" {...register("poster")} />
           </div>
           <div>
             <span>Sinopsis</span>
-            <input
-              type="text"
-              name="synopsis"
-              {...register("synopsis")}
-            />
+            <input type="text" name="synopsis" {...register("synopsis")} />
           </div>
           <div>
             <span>Calificación</span>
-            <input
-              type="text"
-              name="rated"
-              {...register("rated")}
-            />
+            <input type="text" name="rated" {...register("rated")} />
           </div>
           <div>
             <span>Duración</span>
-            <input
-              type="number"
-              name="duration"
-              {...register("duration")}
-            />
+            <input type="number" name="duration" {...register("duration")} />
           </div>
           <div>
             <span>Genero</span>
-            <input
-              type="text"
-              name="genre"
-              {...register("genre")}
-            />
+            <input type="text" name="genre" {...register("genre")} />
           </div>
           <div>
             <span>Director</span>
-            <input
-              type="text"
-              name="director"
-              {...register("director")}
-            />
+            <input type="text" name="director" {...register("director")} />
           </div>
           <div>
             <span>Actores</span>
-            <input
-              type="text"
-              name="actors"
-              {...register("actors")}
-            />
+            <input type="text" name="actors" {...register("actors")} />
           </div>
           <div>
             <span>Fecha Inicio</span>
-            <input
-              type="date"
-              name="iniDate"
-              {...register("iniDate")}
-            />
+            <input type="date" name="iniDate" {...register("iniDate")} />
           </div>
           <div>
             <span>Fecha Fin</span>
-            <input
-              type="date"
-              name="finDate"
-              {...register("finDate")}
-            />
+            <input type="date" name="finDate" {...register("finDate")} />
           </div>
           <div>
-          <select name="isActive" type="boolean" {...register("isActive")}>
-            <option selected value= "true">Disponible</option>
-            <option value= "false">No disponible</option>
-          </select> 
+            <select name="isActive" type="boolean" {...register("isActive")}>
+              <option selected value="true">
+                Disponible
+              </option>
+              <option value="false">No disponible</option>
+            </select>
             {/* <span>En cartelera:</span>
             <input
               type="checkbox"
@@ -130,7 +114,7 @@ const Admin = () => {
               {...register("isActive")}
             /> */}
           </div>
-          
+
           <button className="button">Añadir</button>
         </form>
       </div>

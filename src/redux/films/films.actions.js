@@ -2,57 +2,83 @@
 import axios from "axios";
 export const ADD_FILM = "ADD_FILM";
 export const DELETE_FILM = "DELETE_FILM";
+export const DELETE_FILM_ERROR = "DELETE_FILM_ERROR";
 export const EDIT_FILM = "EDIT_FILM";
 export const ADD_FILM_ERROR = "ADD_FILM_ERROR";
 export const EDIT_FILM_ERROR = "EDIT_FILM_ERROR";
+export const GET_FILM = "GET_FILM";
+export const GET_FILM_ERROR = "GET_FILM_ERROR";
+
+
+export const getFilms = () => (dispatch) => {
+  axios.get("http://localhost:5000/movies/", { withCredentials: true, })
+    .then((res) => {
+      dispatch({
+        type: GET_FILM,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      console.log('Error to get films');
+      dispatch({
+        type: GET_FILM_ERROR,
+        payload: err.message
+      });
+    })
+
+};
 
 export const addFilms = (newFilm) => (dispatch) => {
-  //console.log(newFilm);
 
-  axios.post("http://localhost:5000/movies/add", newFilm, {withCredentials: true,})
+  axios.post("http://localhost:5000/movies/add", newFilm, { withCredentials: true, })
     .then((res) => {
       dispatch({
         type: ADD_FILM,
-        payload: newFilm,
+        payload: res.data,
       });
     })
-    .catch (err => {
+    .catch(err => {
       console.log('Error to saved film');
-      dispatch({ 
-          type: ADD_FILM_ERROR, 
-          payload: err.message 
+      dispatch({
+        type: ADD_FILM_ERROR,
+        payload: err.message
       });
-  })
-    // dispatch({
-    //   type: ADD_FILM,
-    //   payload: newFilm,
-    // });
+    })
 };
 
-export const editFilms = (editFilm, id) => (dispatch) => {
-//   axios.put("http://localhost:5000/movies/{id}", newFilm, {withCredentials: true,})
-//   .then((res) => {
-//     dispatch({
-//       type: ADD_FILM,
-//       payload: newFilm,
-//     });
-//   })
-//   .catch (err => {
-//     console.log('Error to saved film');
-//     dispatch({ 
-//         type: ADD_FILM_ERROR, 
-//         payload: err.message 
-//     });
-// })
-  dispatch({
-    type: EDIT_FILM,
-    payload: { editFilm, id },
-  });
+export const editFilms = (editFilm) => (dispatch) => {
+
+  axios.put(`http://localhost:5000/movies/${editFilm._id}`, editFilm, { withCredentials: true })
+    .then((res) => {
+      dispatch({
+        type: EDIT_FILM,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      console.log('Error to saved film');
+      dispatch({
+        type: EDIT_FILM_ERROR,
+        payload: err.message
+      });
+    })
 };
+
 
 export const deleteFilms = (filmToDelete) => (dispatch) => {
-  dispatch({
-    type: DELETE_FILM,
-    payload: filmToDelete,
-  });
+  
+  axios.delete(`http://localhost:5000/movies/${filmToDelete._id}`, { withCredentials: true })
+    .then((res) => {
+      dispatch({
+        type: DELETE_FILM,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      console.log('Error to delete film');
+      dispatch({
+        type: DELETE_FILM_ERROR,
+        payload: err.message
+      });
+    })
 };
