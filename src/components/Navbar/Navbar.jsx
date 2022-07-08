@@ -10,15 +10,20 @@ const Navbar = () => {
     return(
         <nav>
             <Link to='/'>Home</Link>
-            <Link to="/private">Administracion </Link>
+            { user && user.role === 'admin' && 
+                <Link to="/private">Administracion </Link>
+            }
             { !user &&
                 <>
                     <Link to='/login'>Login</Link>
                     <Link to='/register'>Register</Link>
                 </>
             }
-            { user && 
-                <button onClick={() => dispatch(logoutUser(goClientZone))}>Logout</button>
+            { user  && 
+                <>
+                    <Link to='/gestion'>Client zone</Link>
+                    <button onClick={() => dispatch(logoutUser(goClientZone))}>Logout</button>
+                </>
             }
         </nav>
     );

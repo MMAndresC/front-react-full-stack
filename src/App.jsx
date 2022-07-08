@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import './App.scss';
 import Home from './components/home/Home';
@@ -8,8 +10,15 @@ import Register from './components/User/Register';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Admin from './components/Admin/Admin';
 import EditFilms from './components/EditFilms/EditFilms';
+import UserZone from './components/User/UserZone';
+import { getCheckSession } from './redux/auth/auth.actions';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCheckSession());
+    // eslint-disable-next-line
+  }, []);
   return (
     <div className="app">
       <Navbar/>
@@ -19,6 +28,7 @@ function App() {
         <Route path="/editFilms/:id" element={<PrivateRoute component={<EditFilms />} />} />
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
+        <Route path='/gestion' element={<UserZone/>}></Route>
       </Routes>
     
     </div>
