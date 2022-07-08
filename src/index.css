@@ -4,7 +4,8 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   scroll-behavior: smooth;
 }
 
@@ -16,9 +17,6 @@ body {
   font-weight: 400;
   background: #151418;
   background-image: url(./assets/ocean.jpg);
-  //background-repeat: repeat;
-  //background-size: cover;
-  //width: 100%;
 }
 
 a {
@@ -60,3 +58,4 @@ video {
   display: block;
   max-width: 100%;
 }
+/*# sourceMappingURL=index.css.map */

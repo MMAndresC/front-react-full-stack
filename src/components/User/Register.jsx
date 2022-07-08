@@ -1,8 +1,9 @@
-import { useDispatch } from 'react-redux';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
-import { registerUser } from '../../redux/auth/auth.actions';
+import { registerUser } from "../../redux/auth/auth.actions";
+import "./User.scss";
 
 const Register = () => {
     const { register, handleSubmit, formState:{errors} } = useForm();
@@ -15,7 +16,10 @@ const Register = () => {
         dispatch(registerUser(goClientZone, formData));
     }
 
-    return(
+  return (
+    <div className="Container">
+      <h1 className="SectionTitle">REGISTER</h1>
+      <div className="BigCard">
         <form onSubmit={handleSubmit(onSubmit)}>
             <label>
                 <p>Email</p>
@@ -64,7 +68,9 @@ const Register = () => {
             </label>
             <button>Log In</button>
         </form>
-    );
-}
+      </div>
+    </div>
+  );
+};
 
 export default Register;
