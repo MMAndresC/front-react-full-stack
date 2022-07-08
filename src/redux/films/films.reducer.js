@@ -11,13 +11,13 @@ export const filmsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     
     case actions.ADD_FILM:
-      return { ...state, film: [...film, action.payload] };
+      return { ...state, film: action.payload };
 
     case actions.EDIT_FILM:
       const { id, editFilm } = action.payload;
-      const filmCopy = [...film];
-      filmCopy.splice(id, 1, editFilm); //hago un splice, borro el antiguo y añado el nuevo en su posicion, y añado el modicado
-      return { ...state, film: [...filmCopy] };
+      const filmCopy = editFilm;
+      filmCopy._id = id; 
+      return { ...state, film: filmCopy };
 
     case actions.DELETE_FILM:
       const filmsFiltered = film.filter((exp) => exp !== action.payload);
