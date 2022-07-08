@@ -10,6 +10,7 @@ const Navbar = () => {
     return(
         <nav>
             <Link to='/'>Home</Link>
+            <Link to="/private">Administracion </Link>
             { !user &&
                 <>
                     <Link to='/login'>Login</Link>
