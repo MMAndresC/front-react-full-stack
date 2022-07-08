@@ -5,8 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteFilms} from "../../redux/films/films.actions";
 
-const Films = ({user,dispath}) => {
-  const { film } = useSelector((state) => state.film);
+const Films = () => {
+  const { film } = useSelector(state => state.film);
+ const user = useSelector(state => state.auth.user);
+  //console.log(film);
   const dispatch = useDispatch();
   return (
     <>

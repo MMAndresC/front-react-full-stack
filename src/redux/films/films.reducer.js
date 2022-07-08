@@ -14,19 +14,28 @@ export const filmsReducer = (state = INITIAL_STATE, action) => {
       return { ...state, film: [...film, action.payload] };
 
     case actions.EDIT_FILM:
-      const { id, editFilm } = action.payload;
-      const filmCopy = [...film];
-      filmCopy.splice(id, 1, editFilm); //hago un splice, borro el antiguo y añado el nuevo en su posicion, y añado el modicado
-      return { ...state, film: [...filmCopy] };
+      // const { id, editFilm } = action.payload;
+      const filmCopy = film.filter((fil) => fil._id !== action.payload._id);
+        // encontrar en filmcopy la pelicula con id del que viene en el  payload y sobreescribir esa con action     
+     
+      //console.log(action.payload);
+
+      return { ...state, film:  [...filmCopy, action.payload] };
+
+      case actions.GET_FILM:
+        return { ...state, film: [...action.payload] };
 
     case actions.DELETE_FILM:
-      const filmsFiltered = film.filter((exp) => exp !== action.payload);
+       const filmsFiltered = film.filter((fil) => fil !== action.payload);
       return { ...state, film: [...filmsFiltered] };
 
       case actions.ADD_FILM_ERROR: 
         return {...state, error: action.payload };
         
         case actions.EDIT_FILM_ERROR: 
+        return {...state, error: action.payload };
+
+        case actions.GET_FILM_ERROR: 
         return {...state, error: action.payload };
 
 
