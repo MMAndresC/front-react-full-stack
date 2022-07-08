@@ -8,10 +8,12 @@ export const ADD_FILM_ERROR = "ADD_FILM_ERROR";
 export const EDIT_FILM_ERROR = "EDIT_FILM_ERROR";
 export const GET_FILM = "GET_FILM";
 export const GET_FILM_ERROR = "GET_FILM_ERROR";
+export const GET_PREMIERE = "GET_PREMIERE";
+export const GET_PREMIERE_ERROR = "GET_PREMIERE_ERROR";
 
 
 export const getFilms = () => (dispatch) => {
-  axios.get("http://localhost:5000/movies/", { withCredentials: true, })
+  axios.get("http://localhost:5000/movies/admin", { withCredentials: true, })
     .then((res) => {
       dispatch({
         type: GET_FILM,
@@ -47,7 +49,7 @@ export const addFilms = (newFilm) => (dispatch) => {
 };
 
 export const editFilms = (editFilm) => (dispatch) => {
-  axios.put(`http://localhost:5000/movies/${editFilm._id}`, editFilm, { withCredentials: true })
+  axios.put(`http://localhost:5000/movies/edit/${editFilm._id}`, editFilm, { withCredentials: true })
     .then((res) => {
       dispatch({
         type: EDIT_FILM,
@@ -66,7 +68,7 @@ export const editFilms = (editFilm) => (dispatch) => {
 
 export const deleteFilms = (filmToDelete) => (dispatch) => {
   
-  axios.delete(`http://localhost:5000/movies/${filmToDelete._id}`, { withCredentials: true })
+  axios.delete(`http://localhost:5000/movies/delete/${filmToDelete._id}`, { withCredentials: true })
     .then((res) => {
       dispatch({
         type: DELETE_FILM,
@@ -81,3 +83,20 @@ export const deleteFilms = (filmToDelete) => (dispatch) => {
       });
     })
 };
+
+export const getPremiereFilms = () => (dispatch) => {
+
+  axios.get("http://localhost:5000/movies/premiere", { withCredentials: true })
+  .then(res => {
+    dispatch({
+      type: GET_PREMIERE,
+      payload: res.data
+    });
+  })
+  .catch(err => {
+    dispatch({
+      type: GET_PREMIERE_ERROR,
+      payload: err.message
+    });
+  });
+}

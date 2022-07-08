@@ -21,6 +21,9 @@ export const filmsReducer = (state = INITIAL_STATE, action) => {
 
     case actions.GET_FILM:
       return { ...state, film: [...action.payload] };
+    
+    case actions.GET_PREMIERE:
+      return {...state, film: action.payload };
 
     case actions.DELETE_FILM: {
       const filmsFiltered = film.filter((fil) => fil._id !== action.payload._id);
@@ -35,6 +38,10 @@ export const filmsReducer = (state = INITIAL_STATE, action) => {
 
     case actions.GET_FILM_ERROR:
       return { ...state, error: action.payload };
+    
+    case actions.GET_PREMIERE_ERROR:
+      return { ...state, error: action.payload };
+    
     default:
       return state;
   }

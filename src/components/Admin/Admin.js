@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import { addFilms, getFilms, GET_FILM } from "../../redux/films/films.actions";
+import { addFilms, getFilms } from "../../redux/films/films.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Films from "../Films/Films";
 import { useEffect } from "react";
@@ -19,12 +19,8 @@ const Admin = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(film.length === 0){
-      dispatch(getFilms());
-      console.log(film);
-    }
-   
-  }, [film]);
+      dispatch(getFilms());   
+  }, []);
 
   const onSubmit = (formData) => {
     if (formData.isActive === "true") {

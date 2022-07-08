@@ -18,7 +18,7 @@ const Navbar = () => {
                 />
             </div>
             <div className="dropdown-menu">
-                <span class="material-symbols-outlined">menu</span>
+                <span className="material-symbols-outlined">menu</span>
                 <div className="NavMenu">
                     <ol>
                         <li>
