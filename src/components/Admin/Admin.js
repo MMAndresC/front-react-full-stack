@@ -1,11 +1,10 @@
 import { useForm } from "react-hook-form";
 
-import { addFilms, getFilms } from "../../redux/films/films.actions";
+import { addFilms, getFilms, GET_FILM } from "../../redux/films/films.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Films from "../Films/Films";
 import { useEffect } from "react";
-
-// import "./Admin.scss";
+import "./Admin.scss";
 
 const Admin = () => {
   const {
@@ -19,8 +18,12 @@ const Admin = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(getFilms());   
-  }, []);
+    if(film.length === 0){
+      dispatch(getFilms());
+      console.log(film);
+    }
+   
+  }, [film]);
 
   const onSubmit = (formData) => {
     if (formData.isActive === "true") {
@@ -33,12 +36,13 @@ const Admin = () => {
   };
 
   return (
-    <div className="home">
-      <h1 className="h1one">Añade peliculas</h1>
-      <div className="cardi">
+    <div className="Container">
+      <h1 className="SectionTitle">ADMIN</h1>
+      <div className="BigCard">
+      <h2 className="SectionTitle">AÑADIR PELÍCULA</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <span>Titulo</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Título</span>
             <input
               type="text"
               name="name"
@@ -46,7 +50,7 @@ const Admin = () => {
                 required: "Please, enter a name",
                 pattern: {
                   value: /^[a-zA-Z]{3,11}$/,
-                  message: "Introduce un titulo válido",
+                  message: "Introduce un título válido",
                 },
               })}
             />
@@ -59,43 +63,43 @@ const Admin = () => {
             )}
           </div>
 
-          <div>
-            <span>Imagen</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Imagen</span>
             <input type="text" name="poster" {...register("poster")} />
           </div>
-          <div>
-            <span>Sinopsis</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Sinopsis</span>
             <input type="text" name="synopsis" {...register("synopsis")} />
           </div>
-          <div>
-            <span>Calificación</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Calificación</span>
             <input type="text" name="rated" {...register("rated")} />
           </div>
-          <div>
-            <span>Duración</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Duración</span>
             <input type="number" name="duration" {...register("duration")} />
           </div>
-          <div>
-            <span>Genero</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Género</span>
             <input type="text" name="genre" {...register("genre")} />
           </div>
-          <div>
-            <span>Director</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Director</span>
             <input type="text" name="director" {...register("director")} />
           </div>
-          <div>
-            <span>Actores</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Actores</span>
             <input type="text" name="actors" {...register("actors")} />
           </div>
-          <div>
-            <span>Fecha Inicio</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Fecha Inicio</span>
             <input type="date" name="iniDate" {...register("iniDate")} />
           </div>
-          <div>
-            <span>Fecha Fin</span>
+          <div className="InputFilm">
+            <span className="Admin-span">Fecha Fin</span>
             <input type="date" name="finDate" {...register("finDate")} />
           </div>
-          <div>
+          <div className="InputFilm">
             <select name="isActive" type="boolean" {...register("isActive")}>
               <option selected value="true">
                 Disponible
@@ -112,10 +116,10 @@ const Admin = () => {
             /> */}
           </div>
 
-          <button className="button">Añadir</button>
+          <button className="PrimaryBtn">Añadir película</button>
         </form>
       </div>
-      <div className="card">
+      <div className="FilmsCard">
         <Films />
       </div>
     </div>
@@ -123,3 +127,4 @@ const Admin = () => {
 };
 
 export default Admin;
+
