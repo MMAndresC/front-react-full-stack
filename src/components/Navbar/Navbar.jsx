@@ -17,7 +17,10 @@ const Navbar = () => {
                 </>
             }
             { user && 
-                <button onClick={() => dispatch(logoutUser(goClientZone))}>Logout</button>
+                <>
+                    <Link to='/gestion'>Client zone</Link>
+                    <button onClick={() => dispatch(logoutUser(goClientZone))}>Logout</button>
+                </>
             }
         </nav>
     );

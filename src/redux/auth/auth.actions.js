@@ -13,6 +13,13 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGOUT_USER_OK = 'LOGOUT_USER_OK';
 export const LOGOUT_USER_ERROR = 'LOGOUT_USER_ERROR';
 
+export const CHECK_SESSION = 'CHECK_SESSION';
+export const CHECK_SESSION_OK = 'CHECK_SESSION_OK';
+export const CHECK_SESSION_ERROR = 'CHECK_SESSION_ERROR';
+
+export const EDIT_PERSONAL_USER_OK = 'EDIT_PERSONAL_USER_OK';
+export const EDIT_PERSONAL_USER_ERROR = 'EDIT_PERSONAL_USER_ERROR';
+
 
 export const loginUser = (goClientZone, formData) => (dispatch) => {
     
@@ -67,5 +74,33 @@ export const logoutUser = (goClientZone) => dispatch => {
             type: LOGOUT_USER_ERROR, 
             payload: err.message 
         });
+    });
+}
+
+export const getCheckSession = () => dispatch => {
+    dispatch({ type: CHECK_SESSION });
+
+    axios.get('http://localhost:5000/users/session', { withCredentials: true})
+    .then(res => {
+        dispatch({ 
+            type: CHECK_SESSION_OK,
+            payload: res.data
+        });
+    })
+    .catch(err => {
+        dispatch({ type: CHECK_SESSION_ERROR });
+    });
+}
+
+export const editPersonalUser = (newData) => dispatch => {
+    axios.put(`http://localhost:5000/users/gestion/${newData._id}`, newData, { withCredentials: true})
+    .then(res => {
+        dispatch({
+            type: EDIT_PERSONAL_USER_OK,
+            payload: res.data
+        });
+    })
+    .catch(err => {
+        dispatch({ type: EDIT_PERSONAL_USER_ERROR });
     });
 }
