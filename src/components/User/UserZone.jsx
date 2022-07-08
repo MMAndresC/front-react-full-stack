@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { editPersonalUser } from "../../redux/auth/auth.actions";
 
-
 import './userZone.scss';
-
 
 const UserZone = () => {
 
@@ -19,6 +17,7 @@ const UserZone = () => {
     useEffect(() => {
         setValuePersonal('name', user.name);
         setValuePersonal('phone', user.phone);
+        // eslint-disable-next-line
     }, [user.name, user.phone])
 
 
@@ -64,6 +63,7 @@ const UserZone = () => {
                         {...register('password', {
                             required: "Please, enter password",
                             pattern: {
+                                // eslint-disable-next-line
                                 value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
                                 message: "Wrong format password"
                             }

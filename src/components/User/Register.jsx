@@ -22,6 +22,7 @@ const Register = () => {
                 <input type="text" name="email" {...register('email', { 
                     required: "Please, enter a mail",
                     pattern: {
+                        // eslint-disable-next-line
                         value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                         message: "Wrong format mail"
                     } 
@@ -35,6 +36,7 @@ const Register = () => {
                 <input type="password" name="password" {...register('password', { 
                     required: "Please, enter password",
                     pattern: {
+                        // eslint-disable-next-line
                         value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
                         message: "Wrong format password"
                     } 
