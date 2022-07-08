@@ -22,8 +22,8 @@ const Register = () => {
       <div className="BigCard">
         <form onSubmit={handleSubmit(onSubmit)}>
             <label>
-                <p>Email</p>
-                <input type="text" name="email" {...register('email', { 
+                <span>Email</span>
+                <input className="InputField" type="text" name="email" {...register('email', { 
                     required: "Please, enter a mail",
                     pattern: {
                         // eslint-disable-next-line
@@ -36,8 +36,8 @@ const Register = () => {
             </label>
 
             <label>
-                <p>Password</p>
-                <input type="password" name="password" {...register('password', { 
+                <span>Password</span>
+                <input className="InputField" type="password" name="password" {...register('password', { 
                     required: "Please, enter password",
                     pattern: {
                         // eslint-disable-next-line
@@ -50,13 +50,13 @@ const Register = () => {
             </label>
 
             <label>
-                <p>Name</p>
-                <input type="text" name="name" {...register('name', {required: "Please, enter name" })}/>
+                <span>Name</span>
+                <input className="InputField" type="text" name="name" {...register('name', {required: "Please, enter name" })}/>
                 {errors.name && errors.name.type === 'required' && <span>{errors.name.message}</span>}          
             </label>
             <label>
-                <p>Phone</p>
-                <input type="text" name="phone" {...register('phone', { 
+                <span>Phone</span>
+                <input className="InputField" type="text" name="phone" {...register('phone', { 
                     required: "Please, enter phone",
                     pattern: {
                         value: /^\d{9}$/,
@@ -66,7 +66,7 @@ const Register = () => {
                 {errors.phone && errors.phone.type === 'required' && <span>{errors.phone.message}</span>}          
                 {errors.phone && errors.phone.type === 'pattern' && <span>{errors.phone.message}</span>}
             </label>
-            <button>Log In</button>
+            <button className="PrimaryBtn">Register</button>
         </form>
       </div>
     </div>

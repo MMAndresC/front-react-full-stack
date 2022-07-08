@@ -1,3 +1,4 @@
+/*COMMON STYLES FOR LOGIN, REGISTER & USERZONE*/
 .Container {
   width: 100%;
   padding-right: 1rem;
@@ -38,6 +39,10 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -46,6 +51,7 @@
           box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
   color: white;
   width: 100vh;
+  margin-bottom: 3vh;
 }
 
 form {
@@ -63,16 +69,7 @@ form {
           align-items: center;
 }
 
-form label {
-  padding: 3vh;
-}
-
-form label span {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-form label .InputField {
+form .InputField {
   border: 2px solid #c00e1d;
   border-radius: 4px;
   display: -webkit-box;
@@ -91,13 +88,20 @@ form label .InputField {
   width: 300px;
   text-align: center;
   margin-top: 1vh;
+  color: black;
 }
 
-form label .InputField:focus {
+form .InputField:focus {
   background-color: #c00e1d;
 }
 
-form .PrimaryBtn {
+.Users-span {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0vh;
+}
+
+.PrimaryBtn {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   display: -webkit-box;
@@ -136,7 +140,7 @@ form .PrimaryBtn {
   margin-top: 3vh;
 }
 
-form .PrimaryBtn:hover {
+.PrimaryBtn:hover {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   color: black;
@@ -144,7 +148,7 @@ form .PrimaryBtn:hover {
           box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 10px;
 }
 
-/*MEDIA QUERIES*/
+/*COMMON MEDIA QUERIES*/
 @media (max-width: 576px) {
   .Container {
     max-width: 540px;
@@ -188,5 +192,26 @@ form .PrimaryBtn:hover {
   .BigCard {
     max-width: 100vh;
   }
+}
+
+/*STYLES FOR USERZONE*/
+.password-invisible {
+  display: none;
+}
+
+.personal-data,
+.history-data {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 /*# sourceMappingURL=User.css.map */
