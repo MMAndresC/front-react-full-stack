@@ -47,12 +47,11 @@ export const addFilms = (newFilm) => (dispatch) => {
 };
 
 export const editFilms = (editFilm) => (dispatch) => {
-
   axios.put(`http://localhost:5000/movies/${editFilm._id}`, editFilm, { withCredentials: true })
     .then((res) => {
       dispatch({
         type: EDIT_FILM,
-        payload: res.data,
+        payload: editFilm, //res.data devuelve el que sustituye???
       });
     })
     .catch(err => {

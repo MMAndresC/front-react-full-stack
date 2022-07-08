@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./EditFilms.scss";
 const EditFilms = () => {
     const {id} = useParams();   
-    console.log(id);
+
     
     const {film} = useSelector(state => state.film);
     //console.log(film);
@@ -19,9 +19,8 @@ const EditFilms = () => {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        console.log(form);
         dispatch(editFilms(form))
-        navigate('/')
+        navigate('/private');
     }
 
     const handleChange = (ev) => {
