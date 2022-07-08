@@ -1,7 +1,8 @@
+import "./Home.scss";
 
 const Home = () => {
     return(
-        <h1>Home</h1>
+        <h1 className="SectionTitle">UPGRADE CINES</h1>
     );
 }
 
