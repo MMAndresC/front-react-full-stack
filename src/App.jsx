@@ -12,6 +12,7 @@ import Admin from './components/Admin/Admin';
 import EditFilms from './components/EditFilms/EditFilms';
 import UserZone from './components/User/UserZone';
 import { getCheckSession } from './redux/auth/auth.actions';
+import DetailsFilm from './components/DetailsFilm/DetailsFilm';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/gestion' element={<UserZone/>}></Route>
+        <Route path='/details/:id' element={<DetailsFilm/>}></Route>
       </Routes>
     
     </div>

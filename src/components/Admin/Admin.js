@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import { addFilms, getFilms, GET_FILM } from "../../redux/films/films.actions";
+import { addFilms, getFilms } from "../../redux/films/films.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Films from "../Films/Films";
 import { useEffect } from "react";
@@ -13,7 +13,8 @@ const Admin = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const { film } = useSelector(state => state.film); 
+  const { film } = useSelector(state => state.film);
+  
 
   const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ const Admin = () => {
       dispatch(getFilms());
       console.log(film);
     }
-   
+   // eslint-disable-next-line
   }, [film]);
 
   const onSubmit = (formData) => {
@@ -47,12 +48,7 @@ const Admin = () => {
               type="text"
               name="name"
               {...register("name", {
-                required: "Please, enter a name",
-                pattern: {
-                  value: /^[a-zA-Z]{3,11}$/,
-                  message: "Introduce un título válido",
-                },
-              })}
+                required: "Please, enter a name"})}
             />
 
             {errors.name && errors.name.type === "required" && (

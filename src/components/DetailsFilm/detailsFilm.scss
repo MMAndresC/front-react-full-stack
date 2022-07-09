@@ -1,0 +1,26 @@
+div{
+    color: white;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+}
+
+.details-film{
+    display: flex;
+
+    figure{
+        width:50%;
+    }
+
+    div{
+        width:50%;
+    }
+}
+
+.info-hours{
+    display: flex;
+    justify-content: center;
+    gap:10px;
+}
