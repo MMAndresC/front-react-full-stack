@@ -7,6 +7,7 @@ export const GET_SCREENING_ERROR = 'GET_SCREENING_ERROR';
 
 
 export const getScreenings = (movie) => dispatch => {
+
     axios.get(`http://localhost:5000/screenings/${movie._id}`, { withCredentials:true })
     .then(res => {
         dispatch({
@@ -22,6 +23,7 @@ export const getScreenings = (movie) => dispatch => {
     })
 }
 
-export const addScreenings = () => dispatch => {
 
+export const addScreenings = () => dispatch => {
+    //En la zona de admin
 }

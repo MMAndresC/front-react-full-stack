@@ -18,3 +18,4 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
             return {...state};
     }
 }
+
