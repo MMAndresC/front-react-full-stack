@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'; 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -15,6 +16,10 @@ const DetailsFilm = () => {
         dispatch(getScreenings(film[id])); 
         // eslint-disable-next-line   
     },[]);
+
+    const handleDataPreTicket = () => {
+        
+    }
     
     return(
         <main>
@@ -47,7 +52,9 @@ const DetailsFilm = () => {
                         {screening.hour.map((item, index) => {
                             return(
                                 <div key={`${index}-${screening.date}-${item}`} >
-                                    <span name={`${screening.date}-${item}`}>{item}</span>
+                                    <Link to={'/preticket'} onClick={handleDataPreTicket()}>
+                                        <span name={`${screening.date}-${item}`}>{item}</span>
+                                    </Link>
                                 </div>
                             );
                         })}

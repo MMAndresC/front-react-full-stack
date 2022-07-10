@@ -13,6 +13,7 @@ import EditFilms from './components/EditFilms/EditFilms';
 import UserZone from './components/User/UserZone';
 import { getCheckSession } from './redux/auth/auth.actions';
 import DetailsFilm from './components/DetailsFilm/DetailsFilm';
+import ReserveSeat from './components/ReserveSeat/ReserveSeat';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/gestion' element={<UserZone/>}></Route>
         <Route path='/details/:id' element={<DetailsFilm/>}></Route>
+        <Route path='/preticket' element={<ReserveSeat/>}></Route>
       </Routes>
     
     </div>
