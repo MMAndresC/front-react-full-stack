@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -12,10 +12,17 @@ const DetailsFilm = () => {
     const { film } = useSelector(state => state.film);
     const  { user } = useSelector(state => state.auth);
     const { screenings } = useSelector(state => state.screenings);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log('ahora?');
+        if(!film){
+            navigate('/');
+        }
         dispatch(getScreenings(film[id])); 
+        
+       
         // eslint-disable-next-line   
     },[]);
 

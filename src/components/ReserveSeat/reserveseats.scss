@@ -2,3 +2,16 @@
     display:flex;
     flex-direction: row;
 }
+
+.preticket-container-hall-time{
+    display:flex;
+    justify-content: center;
+    
+    span{
+        padding:10px 20px;
+    }
+}
+
+.seat-number{
+    margin: 0 5px;
+}

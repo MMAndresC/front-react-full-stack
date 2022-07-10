@@ -1,9 +1,19 @@
-
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+
+import ConfirmBuyTickets from "./ConfirmBuyTickets";
+
 import './reserveseats.scss';
 
 const ReserveSeat = () => {
+
     const { ticket, takenSeats } = useSelector(state => state.tickets);
+    const [selected, setSelected] = useState([]);
+    const [showConfirmation, setShowConfirmation] = useState(false);
+    const [btnDisabled, setBtnDisabled ] = useState(true);
+    const [price, setPrice] = useState(5.50 || 7.50); 
+
+   
     let numRows = ticket.dimensionsHall.rows;
     let numCols = ticket.dimensionsHall.cols;
     const rows = [];
@@ -14,12 +24,36 @@ const ReserveSeat = () => {
     for(let i = 0; i< numRows; i++){
         if(i === 0){
             rows.push(0);
+        }else{
+            rows.push(numCols * i);
         }
-        rows.push(i + numRows);
     }
-
+    
+        
+    useEffect(() => {
+        const today = new Date().getDay();
+        //Miercoles entrada del dia del espectador
+        if(today === 3){
+            setPrice(5.50);
+        }else{
+            setPrice(7.50);
+        }
+    },[]);
+    
+    
     const handleChecked = (event) => {
-        console.log(event.target.checked);
+        if(event.target.checked){ 
+            setSelected(current => [...current,Number(event.target.id)]);
+            setBtnDisabled(false);
+         }else{
+            const uncheck = selected.filter((seat)=> seat !== Number(event.target.id));
+            if(uncheck.length !== 0){
+                setSelected(uncheck);
+            }else{
+                setSelected([]);
+                setBtnDisabled(true);
+            }
+        }
     }
 
     return (
@@ -49,7 +83,32 @@ const ReserveSeat = () => {
             </section>
             <section className="preticket-container">
                 <h2>Ticket</h2>
+                <h3>{ticket.name}</h3>
+                <p>{ticket.movie}</p>
+                <div className="preticket-container-hall-time">
+                    <span>{ticket.hall}</span>
+                    <span>{ticket.hour}</span>
+                </div>
+                <div>
+                    <span>Butacas:</span>
+                    {selected.length && selected.map((seat =>{
+                        return(
+                            <span className="seat-number">{seat}</span>
+                        );
+                    }))
+                    }
+                </div>
+                <div>
+                    <span>Total:</span>
+                    <span>{selected.length * price}</span>
+                    <h2>Metodo de pago</h2>
+                </div>
+                { btnDisabled  
+                    ? <button className="buy-ticket" disabled>Comprar entradas</button>
+                    : <button className="buy-ticket" onClick={()=>setShowConfirmation(true)}>Comprar entradas</button>
+                }
             </section>
+            { showConfirmation ? <ConfirmBuyTickets seats={selected}/> : <></>}
         </div>
     );
 }
