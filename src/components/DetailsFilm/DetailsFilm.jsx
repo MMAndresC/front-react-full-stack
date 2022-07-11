@@ -20,7 +20,6 @@ const DetailsFilm = () => {
             navigate('/');
         }
         dispatch(getScreenings(film[id])); 
-        
        
         // eslint-disable-next-line   
     },[]);
@@ -29,35 +28,32 @@ const DetailsFilm = () => {
     const dates = screenings.map(screening => {
         return screening.date;
     })
-    const aux = dates.filter((item,index) => {
+    const datesArray = dates.filter((item,index) => {
         return dates.indexOf(item) === index;
     });
-
-    console.log(aux);
+    
 
 
 
     const handleDataPreTicket = (event) => {
-        const dateHour = event.target.id.split('-');
+
+        const filteredScreening = screenings.filter(screening => screening._id === event.target.id);
         let tempTicket = {
-            movie: film[id].name,
+            idScreening: filteredScreening[0]['_id'],
+            movie: filteredScreening[0].movie,
             hall: screenings[0].idHall.name,
-            date: dateHour[0],
-            hour: dateHour[1],
+            date: filteredScreening[0].date,
+            hour: filteredScreening[0].hour,
+            dimensionsHall: {
+                rows: screenings[0].idHall.rows, 
+                cols: screenings[0].idHall.cols
+            },
         }
         
-        tempTicket = {...tempTicket, 
-            dimensionsHall: {rows: screenings[dateHour[2]].idHall.rows, 
-                cols: screenings[dateHour[2]].idHall.cols
-            }
-        }
-
         if(user){
            tempTicket = {...tempTicket, clientEmail: user.email, clientName: user.name};
         }
-        
-        const occupiedSeats = screenings[dateHour[2]].takenSeats;
-        dispatch(temporalTicket(tempTicket, occupiedSeats));
+        dispatch(temporalTicket(tempTicket, filteredScreening[0].takenSeat));
     }
     
     return(
@@ -83,22 +79,20 @@ const DetailsFilm = () => {
 
             </section>
             <section className='screenings-film'>
-            {screenings.map((screening, indexDate) =>{
+            {datesArray.map((date, indexDate) =>{
                 return(
-                    <div key={`${indexDate}-${screening.date}`} className='info-date'>
-                        <h3>{screening.date}</h3>
+                    <div key={`${indexDate}-${date}`} className='info-date'>
+                        <h3>{date}</h3>
                         <div className='info-hours'>
-                       {/*  {screening.hour.map((item, indexHour) => {
-                            return(
-                                <div key={`${indexHour}-${screening.date}-${item}`} >
-                                    <Link to='/preticket' >
-                                        <span id={`${screening.date}-${item}-${indexDate}-${indexHour}`} 
-                                            onClick={handleDataPreTicket}>{item}
-                                        </span>
-                                    </Link>
-                                </div>
-                            );
-                        })} */}
+                        {screenings.map((item, indexHour) => {
+                            return item.date === date  
+                            ? <div>
+                                <Link to='/preticket' >
+                                    <span id={item._id} onClick={handleDataPreTicket}>{item.hour}</span>
+                                </Link>
+                            </div>
+                            : <></>
+                        })}
                         </div>
                     </div>
                 );

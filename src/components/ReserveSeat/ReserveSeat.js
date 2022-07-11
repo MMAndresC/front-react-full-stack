@@ -97,8 +97,9 @@ const ReserveSeat = () => {
                 <h3>{ticket.name}</h3>
                 <p>{ticket.movie}</p>
                 <div className="preticket-container-hall-time">
-                    <span>{ticket.hall}</span>
-                    <span>{ticket.hour}</span>
+                    <p>{ticket.hall}</p>
+                    <span>{`${ticket.date} - ${ticket.hour}`}</span>
+                    <span></span>
                 </div>
                 <div>
                     <span>Butacas:</span>
