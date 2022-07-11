@@ -52,7 +52,7 @@ export const editFilms = (editFilm) => (dispatch) => {
     .then((res) => {
       dispatch({
         type: EDIT_FILM,
-        payload: res.data,
+        payload: editFilm,
       });
     })
     .catch(err => {

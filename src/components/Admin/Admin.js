@@ -4,6 +4,7 @@ import { addFilms, getFilms } from "../../redux/films/films.actions";
 import { useDispatch, useSelector } from "react-redux";
 import Films from "../Films/Films";
 import { useEffect } from "react";
+import ReservaButacas from "../ReservaButacas/ReservaButacas";
 
 // import "./Admin.scss";
 
@@ -120,6 +121,9 @@ const Admin = () => {
       </div>
       <div className="card">
         <Films />
+      </div>
+      <div className="card">
+        <ReservaButacas />
       </div>
     </div>
   );
