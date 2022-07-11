@@ -40,7 +40,7 @@ const DetailsFilm = () => {
         const filteredScreening = screenings.filter(screening => screening._id === event.target.id);
         let tempTicket = {
             idScreening: filteredScreening[0]['_id'],
-            movie: filteredScreening[0].movie,
+            movie: film[0].name,
             hall: screenings[0].idHall.name,
             date: filteredScreening[0].date,
             hour: filteredScreening[0].hour,

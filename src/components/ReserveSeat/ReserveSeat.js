@@ -8,7 +8,7 @@ import './reserveseats.scss';
 
 const ReserveSeat = () => {
 
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const { ticket, takenSeats } = useSelector(state => state.tickets);
     const [selected, setSelected] = useState([]);
     const [showConfirmation, setShowConfirmation] = useState(false);
