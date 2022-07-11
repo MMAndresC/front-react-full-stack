@@ -8,8 +8,10 @@ export const EDIT_SCREENING= 'EDIT_SCREENING';
 export const EDIT_SCREENING_ERROR = 'EDIT_SCREENING_ERROR';  
 
 
-export const editScreenings = (editScreening) => (dispatch) => {
-    axios.put(`http://localhost:5000/movies/edit/${editScreening._id}`, editScreening, { withCredentials: true })
+export const editScreenings = (editScreening) => dispatch => {
+    console.log('actions',editScreening);
+    dispatch({type: EDIT_SCREENING, payload: editScreening});
+    /* axios.put(`http://localhost:5000/movies/edit/${editScreening._id}`, editScreening, { withCredentials: true })
       .then((res) => {
         dispatch({
           type: EDIT_SCREENING,
@@ -22,7 +24,7 @@ export const editScreenings = (editScreening) => (dispatch) => {
           type: EDIT_SCREENING_ERROR,
           payload: err.message
         });
-      })
+      }) */
   };
 
 
