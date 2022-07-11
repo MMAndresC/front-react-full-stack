@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -6,14 +6,21 @@ import { registerUser } from "../../redux/auth/auth.actions";
 import "./User.scss";
 
 const Register = () => {
+
+    const { ticket, isTempTicket } = useSelector(state => state.tickets);
     const { register, handleSubmit, formState:{errors} } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const onSubmit = (formData) => {
-        console.log(formData);
-        const goClientZone = () => navigate('/');
-        dispatch(registerUser(goClientZone, formData));
+        const goClientZone = (isTemp, idScreening) => {
+            if(isTemp){
+              navigate(`/editScreenings/${idScreening}`);
+            }else{
+              navigate("/");
+            }
+        }
+        dispatch(registerUser(goClientZone, isTempTicket, ticket.idScreening, formData));
     }
 
   return (

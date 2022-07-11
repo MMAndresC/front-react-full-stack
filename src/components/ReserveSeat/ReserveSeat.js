@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { editTemporalTicket } from "../../redux/tickets/tickets.actions";
 
-import ConfirmBuyTickets from "./ConfirmBuyTickets";
 
 import './reserveseats.scss';
 
 const ReserveSeat = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { ticket, takenSeats } = useSelector(state => state.tickets);
+    const { user } = useSelector(state => state.auth);
     const [selected, setSelected] = useState([]);
-    const [showConfirmation, setShowConfirmation] = useState(false);
     const [btnDisabled, setBtnDisabled ] = useState(true);
+    const [showLoginInfo, setShowLoginInfo] = useState(false);
     const [price, setPrice] = useState(5.50 || 7.50); 
 
    
@@ -62,8 +64,17 @@ const ReserveSeat = () => {
         const aux = {...ticket};
         aux.mySeats = selected;
         aux.price = price * selected.length;
-        dispatch(editTemporalTicket(aux));
-        setShowConfirmation(true);
+        if(user){
+            aux.clientName = user.name;
+            aux.clientEmail = user.email;
+        }
+        dispatch(editTemporalTicket(aux));  
+        if(user){
+            navigate(`/editScreenings/${ticket.idScreening}`);
+        }else{
+            setShowLoginInfo(true);
+        }
+        
     }
 
     return (
@@ -119,7 +130,19 @@ const ReserveSeat = () => {
                     : <button className="buy-ticket" onClick={handleBtnBuy}>Comprar entradas</button>
                 }
             </section>
-            { showConfirmation ? <ConfirmBuyTickets seats={selected}/> : <></>}
+            {showLoginInfo &&
+                <div>
+                    <p>Para poder realizar la compra de las entradas tiene que estar logueado:</p>
+                    <p>
+                        <span>Ya soy usuario,</span>
+                        <span className="anchor-login" onClick={()=> navigate('/login')}>ir a Login</span>
+                    </p>
+                    <p>
+                        <span>Aún no me he registrado,</span>
+                        <span className="anchor-register" onClick={()=> navigate('/register')}>ir a Registro</span>
+                    </p>
+                </div>
+            }
         </div>
     );
 }

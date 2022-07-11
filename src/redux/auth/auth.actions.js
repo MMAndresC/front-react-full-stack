@@ -21,7 +21,7 @@ export const EDIT_PERSONAL_USER_OK = 'EDIT_PERSONAL_USER_OK';
 export const EDIT_PERSONAL_USER_ERROR = 'EDIT_PERSONAL_USER_ERROR';
 
 
-export const loginUser = (goClientZone, formData) => (dispatch) => {
+export const loginUser = (goClientZone,isTemp, idScreening, formData) => (dispatch) => {
     
     dispatch({ type: LOGIN_USER, payload: formData });
     
@@ -31,7 +31,7 @@ export const loginUser = (goClientZone, formData) => (dispatch) => {
                 type: LOGIN_USER_OK, 
                 payload: res.data 
             });
-            goClientZone();
+            goClientZone(isTemp, idScreening);
         })
         .catch(err => {
             console.log('Error to access bd to login');
@@ -42,7 +42,7 @@ export const loginUser = (goClientZone, formData) => (dispatch) => {
         })
 }
 
-export const registerUser = (goClientZone, formData) => (dispatch) => {
+export const registerUser = (goClientZone, isTemp, idScreening, formData) => (dispatch) => {
     dispatch({ type: REGISTER_USER, payload: formData });
 
     axios.post('http://localhost:5000/users/register', formData, { withCredentials: true })
@@ -51,7 +51,7 @@ export const registerUser = (goClientZone, formData) => (dispatch) => {
             type: REGISTER_USER_OK,
             payload: res.data
         });
-        goClientZone();
+        goClientZone(isTemp, idScreening);
     })
     .catch(err => {
         dispatch({

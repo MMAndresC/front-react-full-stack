@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 export const ticketsReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case actions.ADD_TICKET: {
-            return {...state, ticket: action.payload, isTempTicket: false };
+            return {...state, isTempTicket: false };
         }
         case actions.ADD_TICKET_ERROR: {
             return {...state, error: action.payload, isTempTicket: false };
