@@ -8,7 +8,7 @@ export const EDIT_SCREENING= 'EDIT_SCREENING';
 export const EDIT_SCREENING_ERROR = 'EDIT_SCREENING_ERROR';  
 
 
-export const editSreenings = (editScreening) => (dispatch) => {
+export const editScreenings = (editScreening) => (dispatch) => {
     axios.put(`http://localhost:5000/movies/edit/${editScreening._id}`, editScreening, { withCredentials: true })
       .then((res) => {
         dispatch({

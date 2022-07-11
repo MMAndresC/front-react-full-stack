@@ -13,7 +13,7 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
             return {...state, screenings: action.payload }; 
         }
         case actions.EDIT_SCREENING: {
-            const screenCopy = screenings.filter((scr) => scr.idMovie !== action.payload.idMovie);
+            const screenCopy = state.screenings.filter((scr) => scr._id !== action.payload._id);
             // encontrar en filmcopy la pelicula con id del que viene en el  payload y sobreescribir esa con action     
             return { ...state, screenings: [...screenCopy, action.payload] };
         }
