@@ -62,7 +62,6 @@ const ReserveSeat = () => {
         const aux = {...ticket};
         aux.mySeats = selected;
         aux.price = price * selected.length;
-        console.log(aux);
         dispatch(editTemporalTicket(aux));
         setShowConfirmation(true);
     }
