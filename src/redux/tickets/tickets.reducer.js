@@ -25,6 +25,10 @@ export const ticketsReducer = (state = INITIAL_STATE, action) => {
         case actions.GET_TICKETS_CLIENT_ERROR: {
             return {...state, error: action.payload, isTempTicket: false};
         }
+        case actions.EDIT_TEMPORAL_TICKET: {
+            console.log(action.payload);
+            return {...state, ticket: action.payload}
+        }
         default:
             return {...state };
     }

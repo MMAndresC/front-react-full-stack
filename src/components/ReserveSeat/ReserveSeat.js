@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { editTemporalTicket } from "../../redux/tickets/tickets.actions";
 
 import ConfirmBuyTickets from "./ConfirmBuyTickets";
 
@@ -7,6 +8,7 @@ import './reserveseats.scss';
 
 const ReserveSeat = () => {
 
+    const dispatch = useDispatch;
     const { ticket, takenSeats } = useSelector(state => state.tickets);
     const [selected, setSelected] = useState([]);
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -56,6 +58,15 @@ const ReserveSeat = () => {
         }
     }
 
+    const handleBtnBuy = (event) => {
+        const aux = {...ticket};
+        aux.mySeats = selected;
+        aux.price = price * selected.length;
+        console.log(aux);
+        dispatch(editTemporalTicket(aux));
+        setShowConfirmation(true);
+    }
+
     return (
         <div>
             <section className="hall-container">
@@ -69,8 +80,8 @@ const ReserveSeat = () => {
                                     {!takenSeats 
                                         ? <input type="checkbox" id={row + col} onClick={handleChecked}/>
                                         : takenSeats.indexOf(row+col) === -1 
-                                        ?  <input type="checkbox" id={row + col} onClick={handleChecked}/>
-                                        : <input type="checkbox" id={row + col} disabled/>
+                                            ?  <input type="checkbox" id={row + col} onClick={handleChecked}/>
+                                            : <input type="checkbox" id={row + col} disabled/>
                                     }
                                     </div>
                                 );
@@ -105,7 +116,7 @@ const ReserveSeat = () => {
                 </div>
                 { btnDisabled  
                     ? <button className="buy-ticket" disabled>Comprar entradas</button>
-                    : <button className="buy-ticket" onClick={()=>setShowConfirmation(true)}>Comprar entradas</button>
+                    : <button className="buy-ticket" onClick={handleBtnBuy}>Comprar entradas</button>
                 }
             </section>
             { showConfirmation ? <ConfirmBuyTickets seats={selected}/> : <></>}

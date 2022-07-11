@@ -5,6 +5,7 @@ export const ADD_TICKET_ERROR = 'ADD_TICKET_ERROR';
 export const TEMPORAL_TICKET = 'TEMPORAL_TICKET';
 export const GET_TICKETS_CLIENT = 'GET_TICKETS_CLIENT';
 export const GET_TICKETS_CLIENT_ERROR = 'GET_TICKETS_CLIENT_ERROR';
+export const EDIT_TEMPORAL_TICKET = 'EDIT_TEMPORAL_TICKET';
 
 
 export const temporalTicket = (preTicket, takenSeats) => dispatch => {
@@ -14,6 +15,13 @@ export const temporalTicket = (preTicket, takenSeats) => dispatch => {
             ticket: preTicket,
             occupied: takenSeats
         }
+    });
+}
+
+export const editTemporalTicket = (editedTicket) => dispatch => {
+    dispatch({
+        type: EDIT_TEMPORAL_TICKET,
+        payload: editedTicket
     });
 }
 

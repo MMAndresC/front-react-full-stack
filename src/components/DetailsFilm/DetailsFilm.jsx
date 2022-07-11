@@ -16,7 +16,6 @@ const DetailsFilm = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log('ahora?');
         if(!film){
             navigate('/');
         }
@@ -25,6 +24,17 @@ const DetailsFilm = () => {
        
         // eslint-disable-next-line   
     },[]);
+
+    
+    const dates = screenings.map(screening => {
+        return screening.date;
+    })
+    const aux = dates.filter((item,index) => {
+        return dates.indexOf(item) === index;
+    });
+
+    console.log(aux);
+
 
 
     const handleDataPreTicket = (event) => {
@@ -78,7 +88,7 @@ const DetailsFilm = () => {
                     <div key={`${indexDate}-${screening.date}`} className='info-date'>
                         <h3>{screening.date}</h3>
                         <div className='info-hours'>
-                        {screening.hour.map((item, indexHour) => {
+                       {/*  {screening.hour.map((item, indexHour) => {
                             return(
                                 <div key={`${indexHour}-${screening.date}-${item}`} >
                                     <Link to='/preticket' >
@@ -88,7 +98,7 @@ const DetailsFilm = () => {
                                     </Link>
                                 </div>
                             );
-                        })}
+                        })} */}
                         </div>
                     </div>
                 );
