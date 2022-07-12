@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { editPersonalUser } from "../../redux/auth/auth.actions";
 
 import "./User.scss";
+import Historial from "./Historial";
 
 const UserZone = () => {
   const user = useSelector((state) => state.auth.user);
@@ -23,6 +24,7 @@ const UserZone = () => {
   } = useForm();
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [showHistorial, setShowHistorial] = useState(false);
 
   useEffect(() => {
     setValuePersonal("name", user.name);
@@ -67,10 +69,14 @@ const UserZone = () => {
 
   return (
     <div className="Container">
-    <h1 className="SectionTitle">ACCOUNT</h1>
+    <button className="SectionTitle" onClick={() => setShowHistorial(false)}>DATOS PERSONALES</button>
+    <button className="SectionTitle" onClick={() => setShowHistorial(true)}>HISTORIAL</button>
+    { !showHistorial ?
+      <>
+      <h1 className="SectionTitle">ACCOUNT</h1>
       <div className="BigCard">
+        
         <section className="personal-data">
-          <h2 className="SectionTitle">DATOS PERSONALES</h2>
           <span className="Users-span">{user.email}</span>
           <form onSubmit={handleSubmit(onSubmitPassword)}>
             <input
@@ -106,6 +112,7 @@ const UserZone = () => {
               Guardar cambios
             </button>
           </form>
+
           <button className="PrimaryBtn" onClick={() => showToChangePassword()}>
             {visible ? "Cancelar" : "Editar password"}
           </button>
@@ -137,19 +144,21 @@ const UserZone = () => {
             {errors2?.phone && <p>{errors2.phone.message}</p>}
             <button
               type="submit"
-              className={disabled ? "password-invisible" : "PrimaryBtn"}
-            >
+              className={disabled ? "password-invisible" : "PrimaryBtn"}>
               Guardar cambios
             </button>
           </form>
+
           <button className="PrimaryBtn" onClick={() => showToChangePersonal()}>
             {disabled ? "Editar datos" : "Cancelar"}
           </button>
+
         </section>
-        <section className="history-data">
-          <h2 className="SectionTitle">HISTORIAL</h2>
-        </section>
-      </div>
+        </div>  
+        </>
+        :  <Historial/>
+    }
+      
     </div>
   );
 };

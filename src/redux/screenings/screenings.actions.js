@@ -11,7 +11,7 @@ export const UPDATE_SEATS_ERROR = 'UPDATE_SEATS_ERROR';
 
 
 export const editScreenings = (editScreening) => dispatch => {
-    console.log('actions',editScreening);
+    
     axios.put(`http://localhost:5000/movies/edit/${editScreening._id}`, editScreening, { withCredentials: true })
       .then((res) => {
         dispatch({
@@ -29,6 +29,7 @@ export const editScreenings = (editScreening) => dispatch => {
   };
 
   export const updateSeats = (id, takenSeat) => dispatch => {
+    
     axios.put(`http://localhost:5000/screenings/update/${id}`, takenSeat, { withCredentials: true })
     .then(res => {
         dispatch({

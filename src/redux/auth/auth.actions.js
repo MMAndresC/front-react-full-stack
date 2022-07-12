@@ -97,7 +97,7 @@ export const editPersonalUser = (newData) => dispatch => {
     .then(res => {
         dispatch({
             type: EDIT_PERSONAL_USER_OK,
-            payload: res.data
+            payload: newData
         });
     })
     .catch(err => {

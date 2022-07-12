@@ -42,10 +42,11 @@ export const addTicket = (newTicket) => dispatch => {
     }); 
 }
 
-export const getTicketsByClient = (user) => dispatch => {
-
-    axios.get(`http://localhost:5000/tickets/${user._id}`, { withCredentials: true })
+export const getTicketsByClient = (email) => dispatch => {
+    
+    axios.get(`http://localhost:5000/tickets/${email}`, { withCredentials: true })
     .then(res => {
+        console.log('res del back',res.data);
         dispatch({
             type: GET_TICKETS_CLIENT,
             payload: res.data

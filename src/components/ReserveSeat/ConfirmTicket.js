@@ -1,22 +1,28 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSeats } from "../../redux/screenings/screenings.actions";
-import { addTicket, editTemporalTicket } from "../../redux/tickets/tickets.actions";
-
+import { addTicket } from "../../redux/tickets/tickets.actions";
+import QRCode from "react-qr-code";
+import './confirmTicket.scss';
 
 const ConfirmTicket = () => {
 
     const dispatch = useDispatch();
     const { user } = useSelector(state => state.auth);
     const { ticket } = useSelector(state => state.tickets);
+    const [showQr, setShowQr] = useState(false);
 
     useEffect(() => {
-        if(user && !ticket.email){
+        //COMPROBAR SI ESTO ES REDUNDANTE
+       /*  if(user && !ticket.email){
             dispatch(editTemporalTicket({...ticket, clientName: user.name, clientEmail: user.email }));
+        } */
+        if(ticket.qr){
+            setShowQr(true);
         }
         // eslint-disable-next-line
-    }, []);
+    }, [user, ticket.qr]);
 
     const handleBuyTicket = () => {
         dispatch(updateSeats(ticket.idScreening, ticket.mySeats));
@@ -29,8 +35,8 @@ const ConfirmTicket = () => {
             hour: ticket.hour,
             mySeats: ticket.mySeats,
             price: ticket.price,
-            //qr:
-        }
+            //qr: ""
+        }   
         dispatch(addTicket(ticketToSaveDb));
     }
 
@@ -43,7 +49,12 @@ const ConfirmTicket = () => {
             <h2>{user?.name}</h2>
             <h2>{user.email}</h2>
             <h2>Datos Bancarios</h2>
-            <button onClick={handleBuyTicket}>Pagar</button>
+            { !showQr
+                ? <button onClick={handleBuyTicket}>Pagar</button>
+                : <div className="qr-container">
+                    <QRCode value={ticket?.qr} size={256}/>
+                  </div>
+            }
         </div>
     );
 }
