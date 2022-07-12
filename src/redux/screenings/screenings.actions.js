@@ -19,11 +19,7 @@ export const editScreenings = (editScreening) => dispatch => {
           payload: editScreening, 
         });
       })
-      .catch(err => {
-<<<<<<< HEAD
-=======
-       
->>>>>>> origin/retoqueadmin
+      .catch(err => { 
         dispatch({
           type: EDIT_SCREENING_ERROR,
           payload: err.message
