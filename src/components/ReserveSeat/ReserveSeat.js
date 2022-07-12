@@ -78,9 +78,10 @@ const ReserveSeat = () => {
     }
 
     return (
-        <div>
-            <section className="hall-container">
-                <h2>Butacas</h2>
+        <div className="Container">
+        <div className="ticket-container">
+          <section className="hall-container">
+            <h2 className="SectionTitle2">Butacas</h2>
                 {rows.map((row, i) => {
                     return (
                         <div key={`row${i}`} className='row-container'>
@@ -88,10 +89,10 @@ const ReserveSeat = () => {
                                 return (
                                     <div key={`row${i}-col${j}`}>
                                     {!takenSeats 
-                                        ? <input type="checkbox" id={row + col} onClick={handleChecked}/>
+                                        ? <input type="checkbox" id={row + col} onClick={handleChecked}  className="seat-1"/>
                                         : takenSeats.indexOf(row+col) === -1 
-                                            ?  <input type="checkbox" id={row + col} onClick={handleChecked}/>
-                                            : <input type="checkbox" id={row + col} disabled/>
+                                            ?  <input type="checkbox" id={row + col} onClick={handleChecked}  className="seat-2"/>
+                                            : <input type="checkbox" id={row + col} disabled  className="seat-3"/>
                                     }
                                     </div>
                                 );
@@ -99,17 +100,14 @@ const ReserveSeat = () => {
                         </div>
                     );
                 })}
-
-
             </section>
             <section className="preticket-container">
-                <h2>Ticket</h2>
+                <h2 className="SectionTitle2">Ticket</h2>
                 <h3>{ticket.name}</h3>
                 <p>{ticket.movie}</p>
                 <div className="preticket-container-hall-time">
                     <p>{ticket.hall}</p>
                     <span>{`${ticket.date} - ${ticket.hour}`}</span>
-                    <span></span>
                 </div>
                 <div>
                     <span>Butacas:</span>
@@ -122,12 +120,12 @@ const ReserveSeat = () => {
                 </div>
                 <div>
                     <span>Total:</span>
-                    <span>{selected.length * price}</span>
+                    <span>{selected.length * price}€</span>
                     <h2>Metodo de pago</h2>
                 </div>
                 { btnDisabled  
-                    ? <button className="buy-ticket" disabled>Comprar entradas</button>
-                    : <button className="buy-ticket" onClick={handleBtnBuy}>Comprar entradas</button>
+                    ? <button className="PrimaryBtn" disabled>Comprar entradas</button>
+                    : <button className="PrimaryBtn" onClick={handleBtnBuy}>Comprar entradas</button>
                 }
             </section>
             {showLoginInfo &&
@@ -143,6 +141,7 @@ const ReserveSeat = () => {
                     </p>
                 </div>
             }
+        </div>
         </div>
     );
 }

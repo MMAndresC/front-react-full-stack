@@ -57,50 +57,78 @@ const DetailsFilm = () => {
         dispatch(temporalTicket(tempTicket, filteredScreening[0].takenSeat));
     }
     
-    return(
-        <main>
-            <section className="details-film">
-                <figure>
-                    <h2>{film[id].name}</h2>
-                    <img src={film[id].poster} alt={film[id].name}/>
-                </figure>
-                <div>
-                    <span>Género:</span>
-                    <p>{film[id].genre}</p>
-                    <span>Clasificación:</span>
-                    <p>{film[id].rated}</p>
-                    <span>Duracion:</span>
-                    <p>{film[id].duration}</p>
-                    <span>Director:</span>
-                    <p>{film[id].director}</p>
-                    <span>Intérpretes:</span>
-                    <p>{film[id].actors}</p>
-                    <p>{film[id].synopsis}</p>
+    return (
+        <section className="Container">
+          <div className="details-container">
+            <div className="details-up">
+              <div className="details-up-1">
+                <img
+                  className="Film-img"
+                  src={film[id].poster}
+                  alt={film[id].name}
+                />
+              </div>
+              <div className="details-up-2">
+                <div className="Films-div-long">
+                  <span class="Films-span">Título</span>
+                  <p>{film[id].name}</p>
                 </div>
-
-            </section>
-            <section className='screenings-film'>
-            {datesArray.map((date, indexDate) =>{
-                return(
-                    <div key={`${indexDate}-${date}`} className='info-date'>
-                        <h3>{date}</h3>
-                        <div className='info-hours'>
+                <div className="Films-div-long">
+                  <span class="Films-span">Sinopsis</span>
+                  <p>{film[id].synopsis}</p>
+                </div>
+                <div className="Films-div">
+                  <span className="Films-span">Calificación:</span>
+                  <p>{film[id].rated}</p>
+                </div>
+                <div className="Films-div">
+                  <span className="Films-span">Duración:</span>
+                  <p>{film[id].duration}min.</p>
+                </div>
+                <div className="Films-div">
+                  <span className="Films-span">Género:</span>
+                  <p>{film[id].genre}</p>
+                </div>
+                <div className="Films-div">
+                  <span className="Films-span">Director:</span>
+                  <p>{film[id].director}</p>
+                </div>
+                <div className="Films-div-long">
+                  <span className="Films-span">Actores:</span>
+                  <p>{film[id].actors}</p>
+                </div>
+              </div>
+            </div>
+            <div className="details-down">
+              <h1 className="SectionTitle">COMPRAR ENTRADAS</h1>
+              <div className="details-dates">
+                {datesArray.map((date, indexDate) => {
+                  return (
+                    <div key={`${indexDate}-${date}`} className="details-date">
+                      <h3>{date}</h3>
+                      <div className="details-hour">
                         {screenings.map((item, indexHour) => {
-                            return item.date === date  
-                            ? <div>
-                                <Link to='/preticket' >
-                                    <span id={item._id} onClick={handleDataPreTicket}>{item.hour}</span>
-                                </Link>
+                          return item.date === date ? (
+                            <div className="details-hour-links">
+                              <Link to="/preticket">
+                                <span id={item._id} onClick={handleDataPreTicket}>
+                                  {item.hour}
+                                </span>
+                              </Link>
                             </div>
-                            : <></>
+                          ) : (
+                            <></>
+                          );
                         })}
-                        </div>
+                      </div>
                     </div>
-                );
-            })}
-            </section>
-        </main>
-    );
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
 }
 
 export default DetailsFilm;
