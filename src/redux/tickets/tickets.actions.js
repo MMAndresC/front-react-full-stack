@@ -6,6 +6,10 @@ export const TEMPORAL_TICKET = 'TEMPORAL_TICKET';
 export const GET_TICKETS_CLIENT = 'GET_TICKETS_CLIENT';
 export const GET_TICKETS_CLIENT_ERROR = 'GET_TICKETS_CLIENT_ERROR';
 export const EDIT_TEMPORAL_TICKET = 'EDIT_TEMPORAL_TICKET';
+<<<<<<< HEAD
+=======
+export const RESET_TEMP_TICKET = 'RESET_TEMP_TICKET';
+>>>>>>> prueba-merge-fatal-error
 
 
 export const temporalTicket = (preTicket, takenSeats) => dispatch => {
@@ -42,9 +46,15 @@ export const addTicket = (newTicket) => dispatch => {
     }); 
 }
 
+<<<<<<< HEAD
 export const getTicketsByClient = (user) => dispatch => {
 
     axios.get(`http://localhost:5000/tickets/${user._id}`, { withCredentials: true })
+=======
+export const getTicketsByClient = (email) => dispatch => {
+    
+    axios.get(`http://localhost:5000/tickets/${email}`, { withCredentials: true })
+>>>>>>> prueba-merge-fatal-error
     .then(res => {
         dispatch({
             type: GET_TICKETS_CLIENT,
@@ -59,3 +69,10 @@ export const getTicketsByClient = (user) => dispatch => {
     });
 }
 
+<<<<<<< HEAD
+=======
+export const resetTempTicket = () => dispatch => {
+    dispatch( { type: RESET_TEMP_TICKET } );
+}
+
+>>>>>>> prueba-merge-fatal-error

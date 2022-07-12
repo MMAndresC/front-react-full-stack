@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
+=======
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> prueba-merge-fatal-error
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -6,14 +10,32 @@ import { loginUser } from "../../redux/auth/auth.actions";
 import "./User.scss";
 
 const Login = () => {
+<<<<<<< HEAD
+=======
+  const { ticket, isTempTicket } = useSelector(state => state.tickets);
+>>>>>>> prueba-merge-fatal-error
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = (formData) => {
+<<<<<<< HEAD
     const goClientZone = () => navigate("/");
     dispatch(loginUser(goClientZone, formData));
   };
+=======
+    const goClientZone = (isTemp, idScreening) => {
+      if(isTemp){
+        navigate(`/editScreenings/${idScreening}`);
+      }else{
+        navigate("/");
+      }
+    }
+    
+    dispatch(loginUser(goClientZone,isTempTicket, ticket.idScreening, formData));
+  };
+  
+>>>>>>> prueba-merge-fatal-error
 
   return (
       <div className="Container">

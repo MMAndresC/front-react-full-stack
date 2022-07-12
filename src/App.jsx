@@ -14,6 +14,10 @@ import UserZone from './components/User/UserZone';
 import { getCheckSession } from './redux/auth/auth.actions';
 import DetailsFilm from './components/DetailsFilm/DetailsFilm';
 import ReserveSeat from './components/ReserveSeat/ReserveSeat';
+<<<<<<< HEAD
+=======
+import ConfirmTicket from './components/ReserveSeat/ConfirmTicket';
+>>>>>>> prueba-merge-fatal-error
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +37,10 @@ function App() {
         <Route path='/gestion' element={<UserZone/>}></Route>
         <Route path='/details/:id' element={<DetailsFilm/>}></Route>
         <Route path='/preticket' element={<ReserveSeat/>}></Route>
+<<<<<<< HEAD
+=======
+        <Route path='/editScreenings/:id' element={<ConfirmTicket/>}></Route>
+>>>>>>> prueba-merge-fatal-error
       </Routes>
     
     </div>

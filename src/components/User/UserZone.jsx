@@ -4,6 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { editPersonalUser } from "../../redux/auth/auth.actions";
 
 import "./User.scss";
+<<<<<<< HEAD
+=======
+import Historial from "./Historial";
+import { getTicketsByClient } from "../../redux/tickets/tickets.actions";
+>>>>>>> prueba-merge-fatal-error
 
 const UserZone = () => {
   const user = useSelector((state) => state.auth.user);
@@ -23,10 +28,18 @@ const UserZone = () => {
   } = useForm();
   const [visible, setVisible] = useState(false);
   const [disabled, setDisabled] = useState(true);
+<<<<<<< HEAD
+=======
+  const [showHistorial, setShowHistorial] = useState(false);
+>>>>>>> prueba-merge-fatal-error
 
   useEffect(() => {
     setValuePersonal("name", user.name);
     setValuePersonal("phone", user.phone);
+<<<<<<< HEAD
+=======
+    dispatch(getTicketsByClient(user.email));
+>>>>>>> prueba-merge-fatal-error
     // eslint-disable-next-line
   }, [user.name, user.phone]);
 
@@ -67,10 +80,21 @@ const UserZone = () => {
 
   return (
     <div className="Container">
+<<<<<<< HEAD
     <h1 className="SectionTitle">ACCOUNT</h1>
       <div className="BigCard">
         <section className="personal-data">
           <h2 className="SectionTitle">DATOS PERSONALES</h2>
+=======
+    <button className="SectionTitle" onClick={() => setShowHistorial(false)}>DATOS PERSONALES</button>
+    <button className="SectionTitle" onClick={() => setShowHistorial(true)}>HISTORIAL</button>
+    { !showHistorial ?
+      <>
+      <h1 className="SectionTitle">ACCOUNT</h1>
+      <div className="BigCard">
+        
+        <section className="personal-data">
+>>>>>>> prueba-merge-fatal-error
           <span className="Users-span">{user.email}</span>
           <form onSubmit={handleSubmit(onSubmitPassword)}>
             <input
@@ -106,6 +130,10 @@ const UserZone = () => {
               Guardar cambios
             </button>
           </form>
+<<<<<<< HEAD
+=======
+
+>>>>>>> prueba-merge-fatal-error
           <button className="PrimaryBtn" onClick={() => showToChangePassword()}>
             {visible ? "Cancelar" : "Editar password"}
           </button>
@@ -137,6 +165,7 @@ const UserZone = () => {
             {errors2?.phone && <p>{errors2.phone.message}</p>}
             <button
               type="submit"
+<<<<<<< HEAD
               className={disabled ? "password-invisible" : "PrimaryBtn"}
             >
               Guardar cambios
@@ -150,6 +179,23 @@ const UserZone = () => {
           <h2 className="SectionTitle">HISTORIAL</h2>
         </section>
       </div>
+=======
+              className={disabled ? "password-invisible" : "PrimaryBtn"}>
+              Guardar cambios
+            </button>
+          </form>
+
+          <button className="PrimaryBtn" onClick={() => showToChangePersonal()}>
+            {disabled ? "Editar datos" : "Cancelar"}
+          </button>
+
+        </section>
+        </div>  
+        </>
+        :  <Historial/>
+    }
+      
+>>>>>>> prueba-merge-fatal-error
     </div>
   );
 };

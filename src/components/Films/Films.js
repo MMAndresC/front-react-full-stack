@@ -9,7 +9,10 @@ import "./Films.scss";
 const Films = () => {
   const { film } = useSelector((state) => state.film);
   const user = useSelector((state) => state.auth.user);
+<<<<<<< HEAD
   //console.log(film);
+=======
+>>>>>>> prueba-merge-fatal-error
   const dispatch = useDispatch();
   return (
     <>

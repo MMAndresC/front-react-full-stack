@@ -21,7 +21,11 @@ export const EDIT_PERSONAL_USER_OK = 'EDIT_PERSONAL_USER_OK';
 export const EDIT_PERSONAL_USER_ERROR = 'EDIT_PERSONAL_USER_ERROR';
 
 
+<<<<<<< HEAD
 export const loginUser = (goClientZone, formData) => (dispatch) => {
+=======
+export const loginUser = (goClientZone,isTemp, idScreening, formData) => (dispatch) => {
+>>>>>>> prueba-merge-fatal-error
     
     dispatch({ type: LOGIN_USER, payload: formData });
     
@@ -31,7 +35,11 @@ export const loginUser = (goClientZone, formData) => (dispatch) => {
                 type: LOGIN_USER_OK, 
                 payload: res.data 
             });
+<<<<<<< HEAD
             goClientZone();
+=======
+            goClientZone(isTemp, idScreening);
+>>>>>>> prueba-merge-fatal-error
         })
         .catch(err => {
             console.log('Error to access bd to login');
@@ -42,7 +50,11 @@ export const loginUser = (goClientZone, formData) => (dispatch) => {
         })
 }
 
+<<<<<<< HEAD
 export const registerUser = (goClientZone, formData) => (dispatch) => {
+=======
+export const registerUser = (goClientZone, isTemp, idScreening, formData) => (dispatch) => {
+>>>>>>> prueba-merge-fatal-error
     dispatch({ type: REGISTER_USER, payload: formData });
 
     axios.post('http://localhost:5000/users/register', formData, { withCredentials: true })
@@ -51,7 +63,11 @@ export const registerUser = (goClientZone, formData) => (dispatch) => {
             type: REGISTER_USER_OK,
             payload: res.data
         });
+<<<<<<< HEAD
         goClientZone();
+=======
+        goClientZone(isTemp, idScreening);
+>>>>>>> prueba-merge-fatal-error
     })
     .catch(err => {
         dispatch({
@@ -97,7 +113,11 @@ export const editPersonalUser = (newData) => dispatch => {
     .then(res => {
         dispatch({
             type: EDIT_PERSONAL_USER_OK,
+<<<<<<< HEAD
             payload: res.data
+=======
+            payload: newData
+>>>>>>> prueba-merge-fatal-error
         });
     })
     .catch(err => {
