@@ -22,19 +22,28 @@ const Home = () => {
     return (
         <>
             <h1 className="SectionTitle">UPGRADE CINES</h1>
+            <section className="cartelera-all">
             {film.length > 0 &&
                 film.map((fil, index) => {
                     return (
-                        <section key={fil._id}>
-                            <Link to={`/details/${index}`} >
-                                <h2>{fil.name}</h2>
-                                <img src={fil.poster} alt={fil.name} />
+                        <div key={fil._id}>
+                            <Link to={`/details/${index}`} className="cartelera-card">
+                            <div className="cartelera-card-black">
+                            <img
+                            className="cartelera-card-img"
+                            src={fil.poster}
+                            alt={fil.name}
+                            />
+                            </div>
+                            <h2>{fil.name}</h2>
+                            <h2 className="details">VER DETALLES</h2>
                             </Link>
-                        </section>
+                        </div>
 
                     );
                 })
             }
+            </section>
         </>
     );
 }

@@ -21,7 +21,7 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
         } */
         case actions.UPDATE_SEATS: {
             //Da error
-          /*   const {id, seats} = action.payload;
+            const {id, seats} = action.payload;
             const updated = state.screenings.filter(item => item._id === id);
            if(updated[0].takenSeat){
                 updated[0].takenSeat = [...updated[0].takenSeat, ...seats]
@@ -29,8 +29,8 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
                 updated[0].takenSeat = seats;
            }
            const rest = state.screenings.filter(item => item._id !== id);
-            return {...state, screenings: [...rest, ...updated] }; */
-            return {...state };
+            return {...state, screenings: [...rest, ...updated] };
+            //return {...state };
         }
         case actions.UPDATE_SEATS_ERROR : {
             return {...state, error:action.payload };
