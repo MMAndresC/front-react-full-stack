@@ -22,14 +22,24 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
         case actions.UPDATE_SEATS: {
             //Da error
             const {id, seats} = action.payload;
-            const updated = state.screenings.filter(item => item._id === id);
-           if(updated[0].takenSeat){
-                updated[0].takenSeat = [...updated[0].takenSeat, ...seats]
+            const newScreenings = state.screenings.map((screening) => {
+                if(screening._id !== id) return screening;
+                return {
+                    ...screening, 
+                    takenSeat: [...screening.takenSeat, ...seats]
+                }
+            });
+          /*   const updated = state.screenings.find(item => item._id === id);
+           if(updated.takenSeat?.length){
+                updated.takenSeat = [...updated.takenSeat, ...seats]
            }else{
-                updated[0].takenSeat = seats;
+                updated.takenSeat = seats;
            }
-           const rest = state.screenings.filter(item => item._id !== id);
-            return {...state, screenings: [...rest, ...updated] };
+           const rest = state.screenings.filter(item => item._id !== id); */
+           return {...state, screenings: newScreenings };
+           
+           //return { ...newState};
+           // return {...state, screenings: [...rest, updated] };
             //return {...state };
         }
         case actions.UPDATE_SEATS_ERROR : {

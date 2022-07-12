@@ -89,7 +89,10 @@ const DetailsFilm = () => {
                             return item.date === date  
                             ? <div>
                                 <Link to='/preticket' >
-                                    <span id={item._id} onClick={handleDataPreTicket}>{item.hour}</span>
+                                    <span id={item._id} 
+                                        onClick={handleDataPreTicket}
+                                        key={item._id}
+                                    >{item.hour}</span>
                                 </Link>
                             </div>
                             : <></>
