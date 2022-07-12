@@ -84,15 +84,21 @@ const ReserveSeat = () => {
             <h2 className="SectionTitle2">Butacas</h2>
                 {rows.map((row, i) => {
                     return (
-                        <div key={`row${i}`} className='row-container'>
+                        <div key={`row${i}`} className='row-container' >
                             {cols.map((col, j) => {
                                 return (
                                     <div key={`row${i}-col${j}`}>
                                     {!takenSeats 
-                                        ? <input type="checkbox" id={row + col} onClick={handleChecked}  className="seat-1"/>
+                                        ? <input type="checkbox" id={row + col} onClick={handleChecked}  
+                                            className="seat-1" key={`${i}-${j}seat-1`}
+                                            />
                                         : takenSeats.indexOf(row+col) === -1 
-                                            ?  <input type="checkbox" id={row + col} onClick={handleChecked}  className="seat-2"/>
-                                            : <input type="checkbox" id={row + col} disabled  className="seat-3"/>
+                                            ?  <input type="checkbox" id={row + col} onClick={handleChecked}  
+                                                className="seat-2" key={`${i}-${j}seat-2`}
+                                                />
+                                            : <input type="checkbox" id={row + col} disabled  className="seat-3"
+                                                key={`${i}-${j}seat-3`}
+                                            />
                                     }
                                     </div>
                                 );
@@ -111,11 +117,11 @@ const ReserveSeat = () => {
                 </div>
                 <div>
                     <span>Butacas:</span>
-                    {selected.length && selected.map((seat =>{
+                    {selected.length && selected.map((seat, index) =>{
                         return(
-                            <span className="seat-number">{seat}</span>
+                            <span className="seat-number" key={`${index}-seat-number`}>{seat}</span>
                         );
-                    }))
+                    })
                     }
                 </div>
                 <div>

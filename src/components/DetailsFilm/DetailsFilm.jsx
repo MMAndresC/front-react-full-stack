@@ -70,11 +70,11 @@ const DetailsFilm = () => {
               </div>
               <div className="details-up-2">
                 <div className="Films-div-long">
-                  <span class="Films-span">Título</span>
+                  <span className="Films-span">Título</span>
                   <p>{film[id].name}</p>
                 </div>
                 <div className="Films-div-long">
-                  <span class="Films-span">Sinopsis</span>
+                  <span className="Films-span">Sinopsis</span>
                   <p>{film[id].synopsis}</p>
                 </div>
                 <div className="Films-div">
@@ -105,13 +105,13 @@ const DetailsFilm = () => {
                 {datesArray.map((date, indexDate) => {
                   return (
                     <div key={`${indexDate}-${date}`} className="details-date">
-                      <h3>{date}</h3>
-                      <div className="details-hour">
+                      <h3 key={`${indexDate}-${date}-h3`}>{date}</h3>
+                      <div className="details-hour" key={`${indexDate}-details-hour`}>
                         {screenings.map((item, indexHour) => {
                           return item.date === date ? (
-                            <div className="details-hour-links">
-                              <Link to="/preticket">
-                                <span id={item._id} onClick={handleDataPreTicket}>
+                            <div className="details-hour-links" key={`${indexDate}-${indexHour}-${date}`}>
+                              <Link to="/preticket" key={`${item._id}-link`}>
+                                <span id={item._id} onClick={handleDataPreTicket} key={`${item._id}-span`}>
                                   {item.hour}
                                 </span>
                               </Link>
