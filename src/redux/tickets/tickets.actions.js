@@ -6,6 +6,7 @@ export const TEMPORAL_TICKET = 'TEMPORAL_TICKET';
 export const GET_TICKETS_CLIENT = 'GET_TICKETS_CLIENT';
 export const GET_TICKETS_CLIENT_ERROR = 'GET_TICKETS_CLIENT_ERROR';
 export const EDIT_TEMPORAL_TICKET = 'EDIT_TEMPORAL_TICKET';
+export const RESET_TEMP_TICKET = 'RESET_TEMP_TICKET';
 
 
 export const temporalTicket = (preTicket, takenSeats) => dispatch => {
@@ -46,7 +47,6 @@ export const getTicketsByClient = (email) => dispatch => {
     
     axios.get(`http://localhost:5000/tickets/${email}`, { withCredentials: true })
     .then(res => {
-        console.log('res del back',res.data);
         dispatch({
             type: GET_TICKETS_CLIENT,
             payload: res.data
@@ -58,5 +58,9 @@ export const getTicketsByClient = (email) => dispatch => {
             payload: err.message
         });
     });
+}
+
+export const resetTempTicket = () => dispatch => {
+    dispatch( { type: RESET_TEMP_TICKET } );
 }
 

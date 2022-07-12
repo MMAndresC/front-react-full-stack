@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getScreenings } from '../../redux/screenings/screenings.actions';
 import './detailsFilm.scss';
-import { temporalTicket } from '../../redux/tickets/tickets.actions';
+import { resetTempTicket, temporalTicket } from '../../redux/tickets/tickets.actions';
 
 const DetailsFilm = () => {
 
@@ -19,6 +19,7 @@ const DetailsFilm = () => {
         if(!film){
             navigate('/');
         }
+        dispatch(resetTempTicket());
         dispatch(getScreenings(film[id])); 
        
         // eslint-disable-next-line   
@@ -40,7 +41,7 @@ const DetailsFilm = () => {
         const filteredScreening = screenings.filter(screening => screening._id === event.target.id);
         let tempTicket = {
             idScreening: filteredScreening[0]['_id'],
-            movie: film[0].name,
+            movie: film[id].name,
             hall: screenings[0].idHall.name,
             date: filteredScreening[0].date,
             hour: filteredScreening[0].hour,

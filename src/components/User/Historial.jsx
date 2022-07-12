@@ -14,14 +14,14 @@ const Historial = () => {
     const [showQr, setShowQr] = useState(false);
     const [valueQr, setValueQr] = useState('');
 
-    useEffect(() => {
+    /* useEffect(() => {
         console.log('effect de histoprialx');
         
         dispatch(getTicketsByClient(user.email));
         
         // eslint-disable-next-line
     },[]);
-
+ */
     const handleShowQr = (event) => {
         setShowQr(true);
         setValueQr(event.target.id);
@@ -31,7 +31,7 @@ const Historial = () => {
         <section className="history-data">
             
             <div>
-                { ticket.map((item) => {
+                { ticket && ticket.map((item) => {
                     return(
                         <div>
                         <span>{item.movie}</span>

@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSeats } from "../../redux/screenings/screenings.actions";
-import { addTicket } from "../../redux/tickets/tickets.actions";
+import { addTicket, editTemporalTicket } from "../../redux/tickets/tickets.actions";
 import QRCode from "react-qr-code";
 import './confirmTicket.scss';
 
@@ -15,9 +15,9 @@ const ConfirmTicket = () => {
 
     useEffect(() => {
         //COMPROBAR SI ESTO ES REDUNDANTE
-       /*  if(user && !ticket.email){
+        if(user && !ticket.email){
             dispatch(editTemporalTicket({...ticket, clientName: user.name, clientEmail: user.email }));
-        } */
+        }
         if(ticket.qr){
             setShowQr(true);
         }

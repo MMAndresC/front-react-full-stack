@@ -5,6 +5,7 @@ import { editPersonalUser } from "../../redux/auth/auth.actions";
 
 import "./User.scss";
 import Historial from "./Historial";
+import { getTicketsByClient } from "../../redux/tickets/tickets.actions";
 
 const UserZone = () => {
   const user = useSelector((state) => state.auth.user);
@@ -29,6 +30,7 @@ const UserZone = () => {
   useEffect(() => {
     setValuePersonal("name", user.name);
     setValuePersonal("phone", user.phone);
+    dispatch(getTicketsByClient(user.email));
     // eslint-disable-next-line
   }, [user.name, user.phone]);
 

@@ -22,6 +22,9 @@ export const ticketsReducer = (state = INITIAL_STATE, action) => {
         case actions.GET_TICKETS_CLIENT: {
             return {...state, ticket: action.payload, isTempTicket: false};
         }
+        case actions.RESET_TEMP_TICKET: {
+            return { ...state, ticket:null, isTempTicket: false };
+        }
         case actions.GET_TICKETS_CLIENT_ERROR: {
             return {...state, error: action.payload, isTempTicket: false};
         }
