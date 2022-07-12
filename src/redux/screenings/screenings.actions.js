@@ -20,6 +20,10 @@ export const editScreenings = (editScreening) => dispatch => {
         });
       })
       .catch(err => {
+<<<<<<< HEAD
+=======
+       
+>>>>>>> origin/retoqueadmin
         dispatch({
           type: EDIT_SCREENING_ERROR,
           payload: err.message
@@ -66,6 +70,20 @@ export const getScreenings = (movie) => dispatch => {
 }
 
 
-export const addScreenings = () => dispatch => {
-    //En la zona de admin
-}
+export const addScreenings = (newScreening) => (dispatch )=> {
+  axios.post("http://localhost:5000/screenings/add", newScreening, { withCredentials: true, })
+  .then((res) => {
+    dispatch({
+      type: ADD_SCREENING,
+      payload: res.data,
+    });
+  })
+  .catch(err => {
+    console.log('Error to saved film');
+    dispatch({
+      type: ADD_SCREENING_ERROR,
+      payload: err.message
+    });
+  })
+};
+ 
