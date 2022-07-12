@@ -32,6 +32,12 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
             return {...state, screenings: [...rest, ...updated] }; */
             return {...state };
         }
+        case actions.ADD_SCREENING:{
+
+
+            return { ...state, screenings:  action.payload};
+           
+        }
         case actions.UPDATE_SEATS_ERROR : {
             return {...state, error:action.payload };
         }
@@ -39,6 +45,9 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
             return {...state, error: action.payload };
         }
         case actions.EDIT_SCREENING_ERROR:{
+            return { ...state, error: action.payload };   
+        }
+        case actions.ADD_SCREENING_ERROR:{
             return { ...state, error: action.payload };   
         }
         default:

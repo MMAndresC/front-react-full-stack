@@ -6,6 +6,7 @@ import Films from "../Films/Films";
 import { useEffect } from "react";
 import "./Admin.scss";
 
+
 const Admin = () => {
   const {
     register,
@@ -33,6 +34,7 @@ const Admin = () => {
       formData.isActive = false;
     }
     reset();
+    
     dispatch(addFilms(formData));
   };
 
