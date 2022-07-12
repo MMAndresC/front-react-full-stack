@@ -19,7 +19,7 @@ const EditFilms = () => {
 
         dispatch(addScreenings(formData));
         dispatch(editFilms(form))
-        navigate('/private');
+        navigate('/');
       }; 
    
     const {id} = useParams();   
