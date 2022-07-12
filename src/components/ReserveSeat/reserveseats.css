@@ -1,0 +1,27 @@
+.row-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.preticket-container-hall-time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.preticket-container-hall-time span {
+  padding: 10px 20px;
+}
+
+.seat-number {
+  margin: 0 5px;
+}
+/*# sourceMappingURL=reserveseats.css.map */

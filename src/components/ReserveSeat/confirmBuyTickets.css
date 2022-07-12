@@ -1,0 +1,10 @@
+.confirm-container {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 50%;
+  height: 50%;
+  background-color: white;
+  color: black;
+}
+/*# sourceMappingURL=confirmBuyTickets.css.map */
