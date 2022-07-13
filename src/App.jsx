@@ -15,6 +15,7 @@ import { getCheckSession } from './redux/auth/auth.actions';
 import DetailsFilm from './components/DetailsFilm/DetailsFilm';
 import ReserveSeat from './components/ReserveSeat/ReserveSeat';
 import ConfirmTicket from './components/ReserveSeat/ConfirmTicket';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function App() {
         <Route path='/preticket' element={<ReserveSeat/>}></Route>
         <Route path='/editScreenings/:id' element={<ConfirmTicket/>}></Route>
       </Routes>
-    
+      <Footer/>
     </div>
   );
 }

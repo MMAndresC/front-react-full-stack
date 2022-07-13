@@ -66,8 +66,9 @@ const ConfirmTicket = () => {
         }   
     }
 
-    return(
-        <div className='confirm-container'>
+    return (
+        <div className="Container">
+          <div className="confirm-ticket-container">
             <h1>{ticket.movie}</h1>
             <h2>{ticket.hall}</h2>
             <h2>{`Sesión: ${ticket.date} - ${ticket.hour}`}</h2>
@@ -75,26 +76,29 @@ const ConfirmTicket = () => {
             <h2>{user?.name}</h2>
             <h2>{user.email}</h2>
             <h2>{`Total: ${ticket.price}€`}</h2>
-            
-            { !showQr
-                
-                ? <StripeCheckout
-                    name={ticket.movie}
-                    token={handleToken}
-                    stripeKey="pk_test_51LKmBRFPgUTVrozIkdXMhsRGxz7yKKSYMq7ebHwdISdDJroAknqCpNJh1Tu1RtjaFfXMza2dBKCaqWEhGvvXP9QZ00dHzhw9Vr"
-                    amount={ticket.price * 100}
-                    panelLabel='Pagar con tarjeta '
-                    currency="EUR"
-                    >
-                        <button onClick={handleBuyTicket}>Pagar con tarjeta</button>
-                    </StripeCheckout>
-                : <div className="qr-container">
-                    <QRCode value={ticket?.qr} size={256}/>
-                  </div>
-            }
-            
+    
+            {!showQr ? (
+              <StripeCheckout
+                name={ticket.movie}
+                token={handleToken}
+                stripeKey="pk_test_51LKmBRFPgUTVrozIkdXMhsRGxz7yKKSYMq7ebHwdISdDJroAknqCpNJh1Tu1RtjaFfXMza2dBKCaqWEhGvvXP9QZ00dHzhw9Vr"
+                amount={ticket.price * 100}
+                panelLabel="Pagar con tarjeta "
+                currency="EUR"
+              >
+                <button onClick={handleBuyTicket}>Pagar con tarjeta</button>
+              </StripeCheckout>
+            ) : (
+              <div className="ticket">
+                <h2 className="SectionTitle">TICKET</h2>
+                <div className="qr-container">
+                  <QRCode value={ticket?.qr} size={256} />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-    );
+      );
 }
 
 export default ConfirmTicket;

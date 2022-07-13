@@ -71,8 +71,8 @@ const UserZone = () => {
 
   return (
     <div className="Container">
-    <button className="SectionTitle" onClick={() => setShowHistorial(false)}>DATOS PERSONALES</button>
-    <button className="SectionTitle" onClick={() => setShowHistorial(true)}>HISTORIAL</button>
+    <button className="PrimaryBtn" onClick={() => setShowHistorial(false)}>DATOS PERSONALES</button>
+    <button className="PrimaryBtn" onClick={() => setShowHistorial(true)}>HISTORIAL</button>
     { !showHistorial ?
       <>
       <h1 className="SectionTitle">ACCOUNT</h1>

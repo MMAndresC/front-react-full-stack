@@ -24,7 +24,7 @@ const Historial = () => {
             <div>
                 { ticket && ticket.map((item) => {
                     return(
-                        <div key={ticket._id}>
+                        <div key={ticket._id} className="history-ticket">
                             <span>{item.movie}</span>
                             <span>{item.hall}</span>
                             <span>{item.date}</span>
