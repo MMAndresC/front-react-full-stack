@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { editTemporalTicket } from "../../redux/tickets/tickets.actions";
+import Swal from "sweetalert2";
 
 
 import './reserveseats.scss';
@@ -14,7 +15,6 @@ const ReserveSeat = () => {
     const { user } = useSelector(state => state.auth);
     const [selected, setSelected] = useState([]);
     const [btnDisabled, setBtnDisabled ] = useState(true);
-    const [showLoginInfo, setShowLoginInfo] = useState(false);
     const [price, setPrice] = useState(5.50 || 7.50); 
 
    
@@ -72,9 +72,24 @@ const ReserveSeat = () => {
         if(user){
             navigate(`/editScreenings/${ticket.idScreening}`);
         }else{
-            setShowLoginInfo(true);
+            Swal.fire({
+                title: 'Para poder realizar la compra de las entradas tiene que estar logueado:',
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText:'Soy cliente, ir a Login',
+                confirmButtonColor: '#c00e1d',
+                denyButtonText:`Aún no tengo cuenta, ir a Registro`,
+                denyButtonColor: '#c00e1d',
+                grow: 'row',
+                background: '#d3d3d3',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/login');
+                } else if (result.isDenied) {
+                    navigate('/register');
+                }
+            })
         }
-        
     }
 
     return (
@@ -126,26 +141,12 @@ const ReserveSeat = () => {
                 <div>
                     <span>Total:</span>
                     <span>{selected.length * price}€</span>
-                    <h2>Metodo de pago</h2>
                 </div>
                 { btnDisabled  
                     ? <button className="PrimaryBtn" disabled>Comprar entradas</button>
                     : <button className="PrimaryBtn" onClick={handleBtnBuy}>Comprar entradas</button>
                 }
             </section>
-            {showLoginInfo &&
-                <div>
-                    <p>Para poder realizar la compra de las entradas tiene que estar logueado:</p>
-                    <p>
-                        <span>Ya soy usuario,</span>
-                        <span className="anchor-login" onClick={()=> navigate('/login')}>ir a Login</span>
-                    </p>
-                    <p>
-                        <span>Aún no me he registrado,</span>
-                        <span className="anchor-register" onClick={()=> navigate('/register')}>ir a Registro</span>
-                    </p>
-                </div>
-            }
         </div>
         </div>
     );
