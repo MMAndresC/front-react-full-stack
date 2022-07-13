@@ -18,7 +18,6 @@ const EditFilms = () => {
         reset();
 
         dispatch(addScreenings(formData));
-        dispatch(editFilms(form))
         navigate('/');
       }; 
    

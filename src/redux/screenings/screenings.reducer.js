@@ -27,7 +27,7 @@ export const screeningsReducer = (state = INITIAL_STATE, action) => {
         case actions.ADD_SCREENING:{
 
 
-            return { ...state, screenings:  action.payload};
+            return { ...state, screenings: [...state.screenings, action.payload]};
            
         }
         case actions.UPDATE_SEATS_ERROR : {
