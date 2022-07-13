@@ -82,6 +82,9 @@ const ReserveSeat = () => {
         <div className="ticket-container">
           <section className="hall-container">
             <h2 className="SectionTitle2">Butacas</h2>
+            <div>
+        <img className="pantcine" src="https://img.freepik.com/vector-gratis/cine-cine-pantalla-blanco-asiento-rojo_34230-250.jpg?size=626&ext=jpg" alt="cine"/>
+    </div>
                 {rows.map((row, i) => {
                     return (
                         <div key={`row${i}`} className='row-container' >
