@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSeats } from "../../redux/screenings/screenings.actions";
 import { addTicket, editTemporalTicket } from "../../redux/tickets/tickets.actions";
 import QRCode from "react-qr-code";
+import StripeCheckout from 'react-stripe-checkout';
 import './confirmTicket.scss';
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const ConfirmTicket = () => {
 
@@ -12,6 +15,9 @@ const ConfirmTicket = () => {
     const { user } = useSelector(state => state.auth);
     const { ticket } = useSelector(state => state.tickets);
     const [showQr, setShowQr] = useState(false);
+
+    let ticketToSaveDb={};
+    
 
     useEffect(() => {
         //COMPROBAR SI ESTO ES REDUNDANTE
@@ -24,9 +30,31 @@ const ConfirmTicket = () => {
         // eslint-disable-next-line
     }, [user, ticket.qr]);
 
+   
+    const handleToken = (token) => {
+        axios.post('http://localhost:5000/checkout', { token, ticket})
+        .then(res => {
+            if(res.data === 'Purchased'){
+                
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Pago completado',
+                    showConfirmButton: true,
+                    
+                })
+                dispatch(addTicket(ticketToSaveDb));
+            }
+        })
+        .catch((err) => {
+            return (err);
+        })
+    }
+   
+
     const handleBuyTicket = () => {
         dispatch(updateSeats(ticket.idScreening, ticket.mySeats));
-        const ticketToSaveDb = {
+        ticketToSaveDb = {
             clientEmail: ticket.clientEmail,
             clientName: ticket.clientName,
             movie: ticket.movie,
@@ -35,9 +63,7 @@ const ConfirmTicket = () => {
             hour: ticket.hour,
             mySeats: ticket.mySeats,
             price: ticket.price,
-            //qr: ""
         }   
-        dispatch(addTicket(ticketToSaveDb));
     }
 
     return(
@@ -48,13 +74,22 @@ const ConfirmTicket = () => {
             <h2>{`Butacas: ${ticket.mySeats}`}</h2>
             <h2>{user?.name}</h2>
             <h2>{user.email}</h2>
-            <h2>Datos Bancarios</h2>
+            <h2>{`Total: ${ticket.price}€`}</h2>
+            <StripeCheckout
+                name={ticket.movie}
+                token={handleToken}
+                stripeKey="pk_test_51LKmBRFPgUTVrozIkdXMhsRGxz7yKKSYMq7ebHwdISdDJroAknqCpNJh1Tu1RtjaFfXMza2dBKCaqWEhGvvXP9QZ00dHzhw9Vr"
+                amount={ticket.price * 100}
+                panelLabel='Pagar con tarjeta '
+                currency="EUR"
+            >
             { !showQr
-                ? <button onClick={handleBuyTicket}>Pagar</button>
+                ? <button onClick={handleBuyTicket}>Pagar con tarjeta</button>
                 : <div className="qr-container">
                     <QRCode value={ticket?.qr} size={256}/>
                   </div>
             }
+            </StripeCheckout>
         </div>
     );
 }

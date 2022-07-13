@@ -70,18 +70,22 @@
     accent-color: black;
     transform: scale(2);
     margin: 1.5vh;
+    cursor: pointer;
   }
   
   .seat-2 {
     accent-color: green;
     transform: scale(2);
     margin: 1.5vh;
+    cursor: pointer;
   }
   
   .seat-3 {
-    accent-color: red;
-    transform: scale(2);
-    margin: 1.5vh;
+    background-color: red;
+    margin: 10px;
+    height: 26px;
+    width: 26px;
+    border-radius: 4px;
   }
   
   .PrimaryBtn {

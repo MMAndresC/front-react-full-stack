@@ -96,9 +96,8 @@ const ReserveSeat = () => {
                                             ?  <input type="checkbox" id={row + col} onClick={handleChecked}  
                                                 className="seat-2" key={`${i}-${j}seat-2`}
                                                 />
-                                            : <input type="checkbox" id={row + col} disabled  className="seat-3"
-                                                key={`${i}-${j}seat-3`}
-                                            />
+                                            : <div className="seat-3"></div>
+                                
                                     }
                                     </div>
                                 );
