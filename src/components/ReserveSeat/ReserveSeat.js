@@ -139,8 +139,9 @@ const ReserveSeat = () => {
                     }
                 </div>
                 <div>
+                    <p>{ `${price} €`}</p>
                     <span>Total:</span>
-                    <span>{selected.length * price}€</span>
+                    <span>{`  ${selected.length * price} €`}</span>
                 </div>
                 { btnDisabled  
                     ? <button className="PrimaryBtn" disabled>Comprar entradas</button>
